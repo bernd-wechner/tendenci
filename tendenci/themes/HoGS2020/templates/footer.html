@@ -1,18 +1,21 @@
 {% load box_tags %}
 {% load forms_tags %}
 
-<!-- ---------------------------------------------------------------
-NOTES: This Footer Template used 1 box to layout the Footer Links
-the Bootstrap Grid System is implemented inside the wysiwyg
-Modals called below are connected to btns also inside the wysiwyg. 
------------------------------------------------------------------ --> 
-
 <div class="container">
 <!-- MAIN FOOTER LINKS INFO: -->     
-  {% box 10 %}
-  <!-- FOOTER ADD-ONS, can be removed and stay with regular links in footer links box --> 
-  <!-- MODAL CONTACT -->          
-  <div id="myModal2" class="modal">  
+  {% box 2 %}
+  
+  <!-- FOOTER BUTTONS -->
+   
+  <!-- WARNING: These were inside the box and hence inside a box div, Pulling them out may cause sizing issues to fix. -->
+   
+  <!-- CONTACT US BUTTON -->
+  
+  <div class="col-md-2 col-sm-2 col-xs-12">
+  	<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#PopUpContact"> Contact </button>
+  </div>
+  
+  <div id="PopUpContact" class="modal">  
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -29,15 +32,19 @@ Modals called below are connected to btns also inside the wysiwyg.
   </div>    
   <!-- END MODAL CONTACT -->          
   
-  <!-- MODAL NEWSLETTER -->          
-  <div id="myModal" class="modal">  
+  <!-- MAILING LIST BUTTON -->
+  <div class="col-md-2 col-sm-2 col-xs-12">
+  	<button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#PopUpSubscribe"> Subscribe </button>
+  </div>
+  
+  <div id="PopUpSubscribe" class="modal">  
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
-          {% embed_form 3 %}
+          {% embed_form 2 %}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -47,4 +54,3 @@ Modals called below are connected to btns also inside the wysiwyg.
   </div>    
   <!-- END MODAL NEWSLETTER -->          
 </div>
- 

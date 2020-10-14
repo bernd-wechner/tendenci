@@ -21,45 +21,43 @@
 =========================================================== -->
 {% block body_ids %}sub{% endblock body_ids %}
 {% block body_classes %}sub{% endblock body_classes %}
+
 {% block html_body %}
+    <!-- Header Starts
+    =========================================================== -->
+    {% theme_include "header.html" %}<!-- Pulls in Header Include -->
+    <!-- Header Ends -->
 
-<!-- Header Starts
-=========================================================== -->
-{% theme_include "header.html" %}<!-- Pulls in Header Include -->
-<!-- Header Ends -->
-<div id="page-top">
-  <div class="container">
- 
-    <div class="{% block content_classes %} col-xs-12 col-sm-7 col-md-8{% endblock %}">
-      
-      {% block content_messages %}
-      {% spaceless %}{% theme_include "base/messages.html" %}{% endspaceless %}
-      {% endblock %}
-      
-      {% block content %}
-      {# Main content goes here #}
-      <div class="jumbotron">
-        <h1>{% trans "Welcome to your Tendenci powered site!" %}</h1>
-      </div>
-      {% endblock %}
-      
-    </div> <!-- close content -->
+    <div id="page-top">
+      <div class="container">
+     
+        <div class="{% block content_classes %} col-xs-12 col-sm-7 col-md-8{% endblock %}">
+            {% block content_messages %}
+                {% spaceless %}{% theme_include "base/messages.html" %}{% endspaceless %}
+            {% endblock %}
+
+            {% block content %}
+                {# Main content goes here #}
+                <div class="jumbotron">
+                    <h1>{% trans "Welcome to your Tendenci powered site!" %}</h1>
+                </div>
+            {% endblock %}          
+        </div> <!-- close content -->
+
+        <div class="{% block sidebar_classes %}sidebar col-xs-12 col-sm-5 col-md-4{% endblock %}" id="sidebar">
+            {% block sidebar %}
+                {% theme_include "sidebar.html" %}
+            {% endblock %}
+        </div>  <!-- close side-bar -->
+        
+      </div> <!-- close container -->
+    </div> <!-- close page-top -->
     
-    <div class="{% block sidebar_classes %}sidebar col-xs-12 col-sm-5 col-md-4{% endblock %}" id="sidebar">
-      
-        {% block sidebar %}
-        {% theme_include "sidebar.html" %}
+    <footer class="{% block footer_classes %}col-xs-12 col-sm-12 col-md-12{% endblock %}">
+        {% block footer %}
+        	{% spaceless %}
+        		{% theme_include "footer.html" %}
+        	{% endspaceless %}
         {% endblock %}
-      
-    </div>  <!-- close side-bar -->
-    
-  </div> <!-- close container -->
-</div> <!-- close page-top -->
-
-<footer class="{% block footer_classes %}col-xs-12 col-sm-12 col-md-12{% endblock %}">
-  {% block footer %}
-  {% spaceless %}{% theme_include "footer.html" %}{% endspaceless %}
-  {% endblock %}
-</footer>
-
+    </footer>
 {% endblock %}
