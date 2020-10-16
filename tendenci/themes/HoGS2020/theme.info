@@ -1,5 +1,0 @@
-[General]
-name = HoGS 2020
-description = Generic Bootstrap 3 Theme Stripped down from the Tendenci 2020 theme for HoGS.
-version = 1.0
-extends = t7-base
