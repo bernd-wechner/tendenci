@@ -91,6 +91,20 @@
             </script>
         <!-- End Google Tag Manager -->
     {% endif %}
+
+    <script>
+    	document.addEventListener("DOMContentLoaded", adjust_account_context, false);
+
+    	function adjust_account_context(e) {
+			{% if request.user.is_authenticated %}
+				$('.login').hide();
+				$('.logout').show();
+		    {% else %}
+				$('.login').show();
+				$('.logout').hide();
+		    {% endif %} 
+	    }
+    </script>	
   </head>
   
   <body id="{% block body_ids %}{% endblock %}" class="{% if request.user.is_superuser %}t-auth-admin-loggedin {% endif %}{% block body_classes %}{% endblock %}">
