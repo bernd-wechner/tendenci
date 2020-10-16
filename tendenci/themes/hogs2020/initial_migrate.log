@@ -1,0 +1,1677 @@
+$ python manage.py initial_migrate -v 3
+Operations to perform:
+  Apply all migrations: accountings, admin, announcements, articles, auth, base, boxes, campaign_monitor, captcha, careers, case_studies, categories, committees, contacts, contenttypes, contributions, corporate_memberships, dashboard, directories, discounts, donations, educations, email_blocks, emails, entities, event_logs, events, explorer, explorer_extensions, exports, files, forms, forums, handler404, help_files, ics, imports, industries, invoices, jobs, locations, make_payments, memberships, meta, metrics, navs, news, newsletters, notifications, pages, payments, perms, photos, profiles, recurring_payments, redirects, regions, registration, reports, resumes, robots, search, sessions, site_settings, sites, social_services, speakers, staff, stories, stripe, studygroups, tagging, tastypie, tendenci_guide, testimonials, theme_editor, user_groups, versions, videos, wp_exporter, wp_importer
+Running pre-migrate handlers for application django_admin_bootstrapped
+Running pre-migrate handlers for application admin
+Running pre-migrate handlers for application auth
+Running pre-migrate handlers for application contenttypes
+Running pre-migrate handlers for application sessions
+Running pre-migrate handlers for application sites
+Running pre-migrate handlers for application formtools
+Running pre-migrate handlers for application bootstrap3
+Running pre-migrate handlers for application dj_pagination
+Running pre-migrate handlers for application tagging
+Running pre-migrate handlers for application captcha
+Running pre-migrate handlers for application haystack
+Running pre-migrate handlers for application tastypie
+Running pre-migrate handlers for application timezone_field
+Running pre-migrate handlers for application tinymce
+Running pre-migrate handlers for application entities
+Running pre-migrate handlers for application base
+Running pre-migrate handlers for application site_settings
+Running pre-migrate handlers for application contributions
+Running pre-migrate handlers for application search
+Running pre-migrate handlers for application notifications
+Running pre-migrate handlers for application registration
+Running pre-migrate handlers for application invoices
+Running pre-migrate handlers for application payments
+Running pre-migrate handlers for application stripe
+Running pre-migrate handlers for application recurring_payments
+Running pre-migrate handlers for application forms
+Running pre-migrate handlers for application files
+Running pre-migrate handlers for application user_groups
+Running pre-migrate handlers for application perms
+Running pre-migrate handlers for application profiles
+Running pre-migrate handlers for application meta
+Running pre-migrate handlers for application articles
+Running pre-migrate handlers for application jobs
+Running pre-migrate handlers for application news
+Running pre-migrate handlers for application stories
+Running pre-migrate handlers for application pages
+Running pre-migrate handlers for application events
+Running pre-migrate handlers for application photos
+Running pre-migrate handlers for application memberships
+Running pre-migrate handlers for application corporate_memberships
+Running pre-migrate handlers for application locations
+Running pre-migrate handlers for application industries
+Running pre-migrate handlers for application regions
+Running pre-migrate handlers for application educations
+Running pre-migrate handlers for application careers
+Running pre-migrate handlers for application make_payments
+Running pre-migrate handlers for application accountings
+Running pre-migrate handlers for application emails
+Running pre-migrate handlers for application email_blocks
+Running pre-migrate handlers for application contacts
+Running pre-migrate handlers for application robots
+Running pre-migrate handlers for application versions
+Running pre-migrate handlers for application event_logs
+Running pre-migrate handlers for application categories
+Running pre-migrate handlers for application theme_editor
+Running pre-migrate handlers for application newsletters
+Running pre-migrate handlers for application redirects
+Running pre-migrate handlers for application directories
+Running pre-migrate handlers for application help_files
+Running pre-migrate handlers for application resumes
+Running pre-migrate handlers for application boxes
+Running pre-migrate handlers for application campaign_monitor
+Running pre-migrate handlers for application wp_importer
+Running pre-migrate handlers for application wp_exporter
+Running pre-migrate handlers for application discounts
+Running pre-migrate handlers for application metrics
+Running pre-migrate handlers for application navs
+Running pre-migrate handlers for application tendenci_guide
+Running pre-migrate handlers for application exports
+Running pre-migrate handlers for application ics
+Running pre-migrate handlers for application imports
+Running pre-migrate handlers for application handler404
+Running pre-migrate handlers for application reports
+Running pre-migrate handlers for application dashboard
+Running pre-migrate handlers for application social_media
+Running pre-migrate handlers for application announcements
+Running pre-migrate handlers for application forums
+Running pre-migrate handlers for application committees
+Running pre-migrate handlers for application case_studies
+Running pre-migrate handlers for application donations
+Running pre-migrate handlers for application speakers
+Running pre-migrate handlers for application staff
+Running pre-migrate handlers for application studygroups
+Running pre-migrate handlers for application videos
+Running pre-migrate handlers for application testimonials
+Running pre-migrate handlers for application social_services
+Running pre-migrate handlers for application explorer_extensions
+Running pre-migrate handlers for application explorer
+Running migrations:
+  Applying contenttypes.0001_initial... OK (0.120s)
+  Applying auth.0001_initial... OK (1.184s)
+  Applying accountings.0001_initial... OK (0.832s)
+  Applying accountings.0002_auto_20200902_1545... OK (0.040s)
+  Applying admin.0001_initial... OK (0.286s)
+  Applying admin.0002_logentry_remove_auto_add... OK (0.025s)
+  Applying admin.0003_logentry_add_action_flag_choices... OK (0.030s)
+  Applying entities.0001_initial... OK (0.356s)
+  Applying announcements.0001_initial... OK (0.291s)
+  Applying announcements.0002_auto_20200902_1545... OK (0.050s)
+  Applying contenttypes.0002_remove_content_type_name... OK (0.060s)
+  Applying auth.0002_alter_permission_name_max_length... OK (0.020s)
+  Applying auth.0003_alter_user_email_max_length... OK (0.035s)
+  Applying auth.0004_alter_user_username_opts... OK (0.030s)
+  Applying auth.0005_alter_user_last_login_null... OK (0.035s)
+  Applying auth.0006_require_contenttypes_0002... OK (0.015s)
+  Applying user_groups.0001_initial... OK (1.184s)
+  Applying site_settings.0001_initial... OK (0.180s)
+  Applying search.0001_initial... OK (0.140s)
+  Applying files.0001_initial... OK (0.817s)
+  Applying meta.0001_initial... OK (0.186s)
+  Applying articles.0001_initial... OK (0.546s)
+  Applying articles.0002_auto_20150804_1545... OK (0.050s)
+  Applying articles.0003_auto_20180315_0857... OK (0.066s)
+  Applying articles.0004_auto_20180315_1839... OK (0.050s)
+  Applying articles.0005_auto_20180718_1202... OK (0.114s)
+  Applying articles.0006_remove_article_google_profile... OK (0.050s)
+  Applying articles.0007_auto_20190815_1700... OK (0.226s)
+  Applying articles.0008_auto_20190816_1257... OK (0.054s)
+  Applying articles.0009_auto_20200902_1545... OK (0.086s)
+  Applying auth.0007_alter_validators_add_error_messages... OK (0.044s)
+  Applying auth.0008_alter_user_username_max_length... OK (0.110s)
+  Applying auth.0009_alter_user_last_name_max_length... OK (0.050s)
+  Applying auth.0010_alter_group_name_max_length... OK (0.030s)
+  Applying auth.0011_update_proxy_permissions... OK (0.050s)
+  Applying base.0001_initial... OK (0.251s)
+  Applying base.0002_auto_20150804_1545... OK (0.020s)
+  Applying base.0003_auto_20190913_1537... OK (0.056s)
+  Applying boxes.0001_initial... OK (0.468s)
+  Applying boxes.0002_auto_20200902_1545... OK (0.098s)
+  Applying invoices.0001_initial... OK (0.464s)
+  Applying payments.0001_initial... OK (0.512s)
+  Applying forms.0001_initial... OK (2.475s)
+  Applying campaign_monitor.0001_initial... OK (1.488s)
+  Applying captcha.0001_initial... OK (0.190s)
+  Applying careers.0001_initial... OK (0.582s)
+  Applying careers.0002_auto_20200902_1545... OK (0.130s)
+  Applying case_studies.0001_initial... OK (0.923s)
+  Applying case_studies.0002_auto_20180724_1325... OK (0.090s)
+  Applying case_studies.0003_auto_20200902_1545... OK (0.150s)
+  Applying categories.0001_initial... OK (0.532s)
+  Applying categories.0002_auto_20180315_0857... OK (0.020s)
+  Applying pages.0001_initial... OK (1.023s)
+  Applying committees.0001_initial... OK (1.324s)
+  Applying committees.0002_auto_20180315_0857... OK (0.200s)
+  Applying committees.0003_committee_sponsors... OK (0.090s)
+  Applying committees.0004_auto_20200902_1545... OK (0.349s)
+  Applying contacts.0001_initial... OK (4.778s)
+  Applying contacts.0002_auto_20150804_1545... OK (0.107s)
+  Applying contacts.0003_auto_20180314_1839... OK (0.133s)
+  Applying contacts.0004_auto_20200902_1545... OK (0.411s)
+  Applying contributions.0001_initial... OK (0.579s)
+  Applying contributions.0002_auto_20200902_1545... OK (0.193s)
+  Applying regions.0001_initial... OK (0.422s)
+  Applying directories.0001_initial... OK (1.411s)
+  Applying directories.0002_auto_20150804_1545... OK (0.140s)
+  Applying directories.0003_auto_20171013_1041... OK (0.230s)
+  Applying directories.0004_auto_20171013_1043... OK (0.772s)
+  Applying directories.0005_auto_20171013_1045... OK (0.361s)
+  Applying directories.0006_auto_20180315_0857... OK (0.134s)
+  Applying directories.0007_auto_20180315_1839... OK (0.110s)
+  Applying directories.0008_auto_20190516_1535... OK (0.722s)
+  Applying directories.0009_auto_20190816_1424... OK (0.140s)
+  Applying directories.0010_directory_region... OK (0.211s)
+  Applying directories.0011_auto_20200731_1511... OK (0.146s)
+  Applying directories.0012_auto_20200731_1736... OK (0.241s)
+  Applying industries.0001_initial... OK (0.431s)
+  Applying memberships.0001_initial... OK (8.988s)
+  Applying emails.0001_initial... OK (0.501s)
+  Applying events.0001_initial... OK (13.598s)
+  Applying corporate_memberships.0001_initial... OK (13.500s)
+  Applying corporate_memberships.0002_auto_20150804_1545... OK (0.182s)
+  Applying corporate_memberships.0003_auto_20151120_1531... OK (0.348s)
+  Applying corporate_memberships.0004_auto_20151120_1538... OK (0.473s)
+  Applying corporate_memberships.0005_auto_20151120_1552... OK (0.672s)
+  Applying corporate_memberships.0006_auto_20160211_1542... OK (0.599s)
+  Applying corporate_memberships.0007_auto_20160927_1706... OK (0.190s)
+  Applying corporate_memberships.0008_auto_20170803_2038... OK (0.291s)
+  Applying corporate_memberships.0009_auto_20170803_2057... OK (0.253s)
+  Applying corporate_memberships.0010_auto_20171201_1721... OK (1.040s)
+  Applying corporate_memberships.0011_auto_20171201_1726... OK (0.260s)
+  Applying corporate_memberships.0012_corpmembershipapp_parent_entities... OK (1.033s)
+  Applying corporate_memberships.0013_auto_20171207_1558... OK (0.260s)
+  Applying corporate_memberships.0014_auto_20180114_1144... OK (1.454s)
+  Applying corporate_memberships.0015_auto_20180114_1155... OK (0.013s)
+  Applying corporate_memberships.0016_auto_20180315_0857... OK (2.053s)
+  Applying corporate_memberships.0017_corpprofile_directory... OK (0.253s)
+  Applying corporate_memberships.0018_auto_20200805_1413... OK (0.662s)
+  Applying corporate_memberships.0019_auto_20200810_1711... OK (0.441s)
+  Applying corporate_memberships.0020_corpmembership_donation_amount... OK (0.157s)
+  Applying corporate_memberships.0021_auto_20200902_1545... OK (2.406s)
+  Applying corporate_memberships.0022_corpprofile_phone2... OK (0.153s)
+  Applying robots.0001_initial... OK (0.107s)
+  Applying event_logs.0001_initial... OK (1.016s)
+  Applying dashboard.0001_initial... OK (0.532s)
+  Applying dashboard.0002_auto_20160519_1705... OK (0.037s)
+  Applying directories.0013_auto_20200902_1545... OK (0.672s)
+  Applying discounts.0001_initial... OK (1.176s)
+  Applying discounts.0002_auto_20200902_1545... OK (0.720s)
+  Applying donations.0001_initial... OK (0.652s)
+  Applying donations.0002_auto_20180315_0857... OK (0.714s)
+  Applying donations.0003_auto_20200902_1545... OK (0.321s)
+  Applying educations.0001_initial... OK (1.011s)
+  Applying educations.0002_auto_20200902_1545... OK (0.321s)
+  Applying email_blocks.0001_initial... OK (0.463s)
+  Applying email_blocks.0002_auto_20160926_1543... OK (0.482s)
+  Applying email_blocks.0003_auto_20200902_1545... OK (0.320s)
+  Applying emails.0002_auto_20180310_1200... OK (0.200s)
+  Applying emails.0003_auto_20200902_1545... OK (0.762s)
+  Applying entities.0002_auto_20180315_0857... OK (0.199s)
+  Applying entities.0003_auto_20190521_1119... OK (0.162s)
+  Applying entities.0004_auto_20200902_1545... OK (0.311s)
+  Applying event_logs.0002_auto_20180315_0857... OK (0.199s)
+  Applying event_logs.0003_auto_20180316_0005... OK (0.031s)
+  Applying event_logs.0004_auto_20190926_1714... OK (0.231s)
+  Applying event_logs.0005_auto_20200206_1418... OK (0.048s)
+  Applying events.0002_auto_20150804_1545... OK (1.013s)
+  Applying events.0003_registrant_salutation... OK (0.172s)
+  Applying events.0004_auto_20160603_1347... OK (0.730s)
+  Applying events.0005_auto_20160603_1347... OK (0.281s)
+  Applying events.0006_remove_event_group... OK (0.202s)
+  Applying events.0007_auto_20180315_0857... OK (3.288s)
+  Applying events.0008_auto_20180315_1839... OK (0.230s)
+  Applying events.0009_sponsor_description... OK (0.152s)
+  Applying events.0010_addon_default_yes... OK (0.070s)
+  Applying events.0011_auto_20190221_1402... OK (0.130s)
+  Applying events.0012_auto_20190614_1631... OK (0.672s)
+  Applying events.0013_auto_20200902_1545... OK (0.281s)
+  Applying explorer.0001_initial... OK (0.862s)
+  Applying explorer.0002_auto_20150501_1515... OK (0.270s)
+  Applying explorer.0003_query_snapshot... OK (0.131s)
+  Applying explorer.0004_querylog_duration... OK (0.130s)
+  Applying explorer.0005_auto_20160105_2052... OK (0.471s)
+  Applying explorer.0006_query_connection... OK (0.130s)
+  Applying explorer.0007_querylog_connection... OK (0.130s)
+  Applying explorer.0008_auto_20190308_1642... OK (0.140s)
+  Applying explorer_extensions.0001_initial... OK (0.341s)
+  Applying exports.0001_initial... OK (0.140s)
+  Applying user_groups.0002_group_show_for_memberships... OK (0.151s)
+  Applying user_groups.0003_group_show_for_events... OK (0.150s)
+  Applying files.0002_file_f_type... OK (0.151s)
+  Applying files.0003_auto_20160309_2123... OK (0.671s)
+  Applying files.0004_auto_20180315_0857... OK (0.171s)
+  Applying files.0005_auto_20180724_1745... OK (0.160s)
+  Applying files.0006_auto_20181115_2145... OK (0.707s)
+  Applying files.0007_auto_20200902_1545... OK (0.268s)
+  Applying forms.0002_auto_20161208_2003... OK (0.150s)
+  Applying forms.0003_auto_20170324_1204... OK (0.241s)
+  Applying forms.0004_auto_20180315_0857... OK (0.913s)
+  Applying forms.0005_auto_20191219_1249... OK (0.051s)
+  Applying forms.0006_auto_20200206_1418... OK (0.050s)
+  Applying forms.0007_auto_20200902_1545... OK (0.090s)
+  Applying forums.0001_initial... OK (5.687s)
+  Applying forums.0002_slugs_optional... OK (1.314s)
+  Applying forums.0003_slugs_fill... OK (0.310s)
+  Applying forums.0004_slugs_required... OK (0.813s)
+  Applying forums.0005_auto_20151009_1754... OK (0.922s)
+  Applying forums.0006_auto_20151115_1335... OK (1.970s)
+  Applying forums.0007_auto_20180315_0857... OK (0.838s)
+  Applying forums.0008_auto_20190717_1153... OK (0.351s)
+  Applying forums.0009_auto_20200902_1545... OK (0.291s)
+  Applying handler404.0001_initial... OK (0.100s)
+  Applying help_files.0001_initial... OK (1.495s)
+  Applying help_files.0002_auto_20200902_1545... OK (0.311s)
+  Applying ics.0001_initial... OK (0.401s)
+  Applying imports.0001_initial... OK (0.169s)
+  Applying industries.0002_auto_20200902_1545... OK (0.874s)
+  Applying invoices.0002_auto_20160308_1501... OK (0.310s)
+  Applying invoices.0003_auto_20181008_1243... OK (0.574s)
+  Applying invoices.0004_auto_20181016_1820... OK (0.530s)
+  Applying invoices.0005_invoice_gratuity... OK (0.170s)
+  Applying invoices.0006_auto_20200902_1545... OK (0.802s)
+  Applying jobs.0001_initial... OK (1.445s)
+  Applying jobs.0002_auto_20170910_1701... OK (0.882s)
+  Applying jobs.0003_auto_20170910_1702... OK (0.321s)
+  Applying jobs.0004_auto_20180315_0857... OK (0.401s)
+  Applying jobs.0005_auto_20190816_1435... OK (0.971s)
+  Applying jobs.0006_auto_20200902_1545... OK (0.653s)
+  Applying locations.0001_initial... OK (1.483s)
+  Applying locations.0002_auto_20170328_1659... OK (0.814s)
+  Applying locations.0003_auto_20180315_0857... OK (0.200s)
+  Applying locations.0004_auto_20200902_1545... OK (0.341s)
+  Applying make_payments.0001_initial... OK (0.602s)
+  Applying make_payments.0002_makepayment_reference_number... OK (0.180s)
+  Applying make_payments.0003_auto_20200902_1545... OK (0.331s)
+  Applying memberships.0002_auto_20150804_1545... OK (0.842s)
+  Applying memberships.0003_auto_20160217_1217... OK (0.179s)
+  Applying memberships.0004_auto_20160520_1740... OK (0.182s)
+  Applying memberships.0005_auto_20161101_1518... OK (0.511s)
+  Applying memberships.0006_membershipset_donation_amount... OK (0.080s)
+  Applying memberships.0007_membershipdefault_auto_renew... OK (0.150s)
+  Applying memberships.0008_auto_20180315_0857... OK (2.287s)
+  Applying memberships.0009_auto_20190725_1025... OK (0.078s)
+  Applying memberships.0010_auto_20200403_1131... OK (0.080s)
+  Applying memberships.0011_membershipdefault_reminder... OK (0.122s)
+  Applying memberships.0012_auto_20200902_1545... OK (1.271s)
+  Applying metrics.0001_initial... OK (0.153s)
+  Applying navs.0001_initial... OK (0.910s)
+  Applying navs.0002_auto_20200902_1545... OK (0.440s)
+  Applying news.0001_initial... OK (1.448s)
+  Applying news.0002_auto_20150804_1545... OK (0.822s)
+  Applying news.0003_auto_20160701_1246... OK (0.562s)
+  Applying news.0004_auto_20160701_1247... OK (0.351s)
+  Applying news.0005_auto_20160701_1627... OK (0.271s)
+  Applying news.0006_auto_20180315_0857... OK (0.521s)
+  Applying news.0007_auto_20180315_1839... OK (0.230s)
+  Applying news.0008_remove_news_google_profile... OK (0.227s)
+  Applying news.0009_auto_20190815_1715... OK (0.972s)
+  Applying news.0010_auto_20190816_1445... OK (0.344s)
+  Applying news.0011_auto_20200902_1545... OK (0.441s)
+  Applying newsletters.0001_initial... OK (0.813s)
+  Applying newsletters.0002_newsletter_enforce_direct_mail_flag... OK (0.127s)
+  Applying notifications.0001_initial... OK (3.360s)
+  Applying pages.0002_auto_20180315_0857... OK (0.692s)
+  Applying pages.0003_remove_page_google_profile... OK (0.203s)
+  Applying pages.0004_auto_20190815_1719... OK (0.341s)
+  Applying pages.0005_auto_20190816_1457... OK (0.341s)
+  Applying pages.0006_auto_20200902_1545... OK (1.063s)
+  Applying payments.0002_auto_20200902_1545... OK (0.441s)
+  Applying perms.0001_initial... OK (0.461s)
+  Applying photos.0001_initial... OK (6.740s)
+  Applying photos.0002_auto_20180315_0857... OK (0.461s)
+  Applying photos.0003_auto_20200403_1131... OK (0.080s)
+  Applying photos.0004_auto_20200902_1545... OK (0.291s)
+  Applying profiles.0001_initial... OK (1.114s)
+  Applying profiles.0002_auto_20150804_1545... OK (1.079s)
+  Applying profiles.0003_auto_20160308_1106... OK (0.174s)
+  Applying profiles.0004_auto_20160330_1426... OK (0.090s)
+  Applying profiles.0005_auto_20160330_1428... OK (0.016s)
+  Applying profiles.0006_auto_20161025_1814... OK (0.094s)
+  Applying profiles.0007_auto_20180315_0857... OK (0.126s)
+  Applying profiles.0008_auto_20180315_1839... OK (0.090s)
+  Applying profiles.0009_auto_20180724_1308... OK (0.094s)
+  Applying profiles.0010_auto_20181019_1640... OK (0.401s)
+  Applying profiles.0011_auto_20190408_1603... OK (0.166s)
+  Applying profiles.0012_profile_region... OK (0.090s)
+  Applying profiles.0013_auto_20200902_1545... OK (0.170s)
+  Applying recurring_payments.0001_initial... OK (3.204s)
+  Applying recurring_payments.0002_recurringpayment_platform... OK (0.225s)
+  Applying recurring_payments.0003_auto_20180315_0857... OK (0.255s)
+  Applying recurring_payments.0004_auto_20200902_1545... OK (0.858s)
+  Applying redirects.0001_initial... OK (0.546s)
+  Applying regions.0002_auto_20200727_1305... OK (0.431s)
+  Applying regions.0003_auto_20200902_1545... OK (1.163s)
+  Applying registration.0001_initial... OK (0.431s)
+  Applying reports.0001_initial... OK (1.048s)
+  Applying reports.0002_auto_20200902_1545... OK (0.426s)
+  Applying resumes.0001_initial... OK (0.787s)
+  Applying resumes.0002_auto_20180315_0857... OK (0.286s)
+  Applying resumes.0003_auto_20190109_1714... OK (0.456s)
+  Applying resumes.0004_auto_20190109_1714... OK (1.283s)
+  Applying resumes.0005_auto_20190816_1502... OK (0.391s)
+  Applying resumes.0006_auto_20200902_1545... OK (0.446s)
+  Applying sessions.0001_initial... OK (0.306s)
+  Applying sites.0001_initial... OK (0.086s)
+  Applying sites.0002_alter_domain_unique... OK (0.201s)
+  Applying social_services.0001_initial... OK (0.923s)
+  Applying speakers.0001_initial... OK (1.659s)
+  Applying speakers.0002_auto_20150827_1627... OK (0.240s)
+  Applying speakers.0003_auto_20180315_0857... OK (0.291s)
+  Applying speakers.0004_auto_20200902_1545... OK (1.309s)
+  Applying staff.0001_initial... OK (1.609s)
+  Applying staff.0002_auto_20170303_1553... OK (0.150s)
+  Applying staff.0003_auto_20170303_1554... OK (0.417s)
+  Applying staff.0004_auto_20170309_1510... OK (0.215s)
+  Applying staff.0005_auto_20180126_1719... OK (0.411s)
+  Applying staff.0006_auto_20180126_1732... OK (0.411s)
+  Applying staff.0007_auto_20180315_0857... OK (0.290s)
+  Applying staff.0008_staff_education... OK (1.018s)
+  Applying staff.0009_auto_20200902_1545... OK (0.465s)
+  Applying stories.0001_initial... OK (1.982s)
+  Applying stories.0002_story_video_embed_url... OK (0.244s)
+  Applying stories.0003_auto_20180315_0857... OK (0.247s)
+  Applying stories.0004_auto_20200902_1545... OK (1.323s)
+  Applying stripe.0001_initial... OK (0.782s)
+  Applying stripe.0002_auto_20180508_1659... OK (1.377s)
+  Applying stripe.0003_charge... OK (0.427s)
+  Applying stripe.0004_auto_20180724_1813... OK (2.271s)
+  Applying stripe.0005_auto_20200902_1545... OK (0.489s)
+  Applying studygroups.0001_initial... OK (2.558s)
+  Applying studygroups.0002_auto_20180315_0857... OK (1.510s)
+  Applying studygroups.0003_studygroup_sponsors... OK (0.270s)
+  Applying studygroups.0004_auto_20200902_1545... OK (0.511s)
+  Applying tagging.0001_initial... OK (0.847s)
+  Applying tagging.0002_on_delete... OK (0.577s)
+  Applying tagging.0003_adapt_max_tag_length... OK (0.040s)
+  Applying tastypie.0001_initial... OK (0.646s)
+  Applying tastypie.0002_api_access_url_length... OK (0.040s)
+  Applying tendenci_guide.0001_initial... OK (0.241s)
+  Applying tendenci_guide.0002_auto_20200403_1131... OK (0.050s)
+  Applying testimonials.0001_initial... OK (2.714s)
+  Applying testimonials.0002_auto_20171023_1502... OK (0.505s)
+  Applying testimonials.0003_auto_20171023_1527... OK (0.441s)
+  Applying testimonials.0004_auto_20180315_0857... OK (0.301s)
+  Applying testimonials.0005_auto_20200902_1545... OK (0.668s)
+  Applying theme_editor.0001_initial... OK (0.542s)
+  Applying user_groups.0004_auto_20200902_1545... OK (1.985s)
+  Applying versions.0001_initial... OK (0.622s)
+  Applying videos.0001_initial... OK (2.040s)
+  Applying videos.0002_auto_20150827_1627... OK (0.270s)
+  Applying videos.0003_video_release_dt... OK (0.258s)
+  Applying videos.0004_auto_20161020_1638... OK (0.444s)
+  Applying videos.0005_auto_20170608_1523... OK (0.070s)
+  Applying videos.0006_auto_20170905_1452... OK (1.250s)
+  Applying videos.0007_auto_20170905_1455... OK (0.461s)
+  Applying videos.0008_auto_20170905_1509... OK (0.524s)
+  Applying videos.0009_auto_20180315_0857... OK (0.859s)
+  Applying videos.0010_auto_20180315_1744... OK (0.276s)
+  Applying videos.0011_auto_20200902_1545... OK (0.519s)
+  Applying wp_exporter.0001_initial... OK (0.471s)
+  Applying wp_importer.0001_initial... OK (1.885s)
+Running post-migrate handlers for application django_admin_bootstrapped
+Running post-migrate handlers for application admin
+Adding content type 'admin | logentry'
+Adding permission 'Permission object (1)'
+Adding permission 'Permission object (2)'
+Adding permission 'Permission object (3)'
+Adding permission 'Permission object (4)'
+Running post-migrate handlers for application auth
+Adding content type 'auth | permission'
+Adding content type 'auth | group'
+Adding content type 'auth | user'
+Adding permission 'Permission object (5)'
+Adding permission 'Permission object (6)'
+Adding permission 'Permission object (7)'
+Adding permission 'Permission object (8)'
+Adding permission 'Permission object (9)'
+Adding permission 'Permission object (10)'
+Adding permission 'Permission object (11)'
+Adding permission 'Permission object (12)'
+Adding permission 'Permission object (13)'
+Adding permission 'Permission object (14)'
+Adding permission 'Permission object (15)'
+Adding permission 'Permission object (16)'
+Running post-migrate handlers for application contenttypes
+Adding content type 'contenttypes | contenttype'
+Adding permission 'Permission object (17)'
+Adding permission 'Permission object (18)'
+Adding permission 'Permission object (19)'
+Adding permission 'Permission object (20)'
+Running post-migrate handlers for application sessions
+Adding content type 'sessions | session'
+Adding permission 'Permission object (21)'
+Adding permission 'Permission object (22)'
+Adding permission 'Permission object (23)'
+Adding permission 'Permission object (24)'
+Running post-migrate handlers for application sites
+Adding content type 'sites | site'
+Adding permission 'Permission object (25)'
+Adding permission 'Permission object (26)'
+Adding permission 'Permission object (27)'
+Adding permission 'Permission object (28)'
+Creating example.com Site object
+Resetting sequence
+Running post-migrate handlers for application formtools
+Running post-migrate handlers for application bootstrap3
+Running post-migrate handlers for application dj_pagination
+Running post-migrate handlers for application tagging
+Adding content type 'tagging | tag'
+Adding content type 'tagging | taggeditem'
+Adding permission 'Permission object (29)'
+Adding permission 'Permission object (30)'
+Adding permission 'Permission object (31)'
+Adding permission 'Permission object (32)'
+Adding permission 'Permission object (33)'
+Adding permission 'Permission object (34)'
+Adding permission 'Permission object (35)'
+Adding permission 'Permission object (36)'
+Running post-migrate handlers for application captcha
+Adding content type 'captcha | captchastore'
+Adding permission 'Permission object (37)'
+Adding permission 'Permission object (38)'
+Adding permission 'Permission object (39)'
+Adding permission 'Permission object (40)'
+Running post-migrate handlers for application haystack
+Running post-migrate handlers for application tastypie
+Adding content type 'tastypie | apiaccess'
+Adding content type 'tastypie | apikey'
+Adding permission 'Permission object (41)'
+Adding permission 'Permission object (42)'
+Adding permission 'Permission object (43)'
+Adding permission 'Permission object (44)'
+Adding permission 'Permission object (45)'
+Adding permission 'Permission object (46)'
+Adding permission 'Permission object (47)'
+Adding permission 'Permission object (48)'
+Running post-migrate handlers for application timezone_field
+Running post-migrate handlers for application tinymce
+Running post-migrate handlers for application entities
+Adding content type 'entities | entity'
+Adding permission 'Permission object (49)'
+Adding permission 'Permission object (50)'
+Adding permission 'Permission object (51)'
+Adding permission 'Permission object (52)'
+Running post-migrate handlers for application base
+Adding content type 'base | checklistitem'
+Adding content type 'base | updatetracker'
+Adding permission 'Permission object (53)'
+Adding permission 'Permission object (54)'
+Adding permission 'Permission object (55)'
+Adding permission 'Permission object (56)'
+Adding permission 'Permission object (57)'
+Adding permission 'Permission object (58)'
+Adding permission 'Permission object (59)'
+Adding permission 'Permission object (60)'
+Running post-migrate handlers for application site_settings
+Adding content type 'site_settings | setting'
+Adding permission 'Permission object (61)'
+Adding permission 'Permission object (62)'
+Adding permission 'Permission object (63)'
+Adding permission 'Permission object (64)'
+Running post-migrate handlers for application contributions
+Adding content type 'contributions | contribution'
+Adding permission 'Permission object (65)'
+Adding permission 'Permission object (66)'
+Adding permission 'Permission object (67)'
+Adding permission 'Permission object (68)'
+Running post-migrate handlers for application search
+Adding content type 'search | unindexeditem'
+Adding permission 'Permission object (69)'
+Adding permission 'Permission object (70)'
+Adding permission 'Permission object (71)'
+Adding permission 'Permission object (72)'
+Running post-migrate handlers for application notifications
+Adding content type 'notifications | notice'
+Adding content type 'notifications | noticeemail'
+Adding content type 'notifications | noticequeuebatch'
+Adding content type 'notifications | noticesetting'
+Adding content type 'notifications | noticetype'
+Adding content type 'notifications | observeditem'
+Adding permission 'Permission object (73)'
+Adding permission 'Permission object (74)'
+Adding permission 'Permission object (75)'
+Adding permission 'Permission object (76)'
+Adding permission 'Permission object (77)'
+Adding permission 'Permission object (78)'
+Adding permission 'Permission object (79)'
+Adding permission 'Permission object (80)'
+Adding permission 'Permission object (81)'
+Adding permission 'Permission object (82)'
+Adding permission 'Permission object (83)'
+Adding permission 'Permission object (84)'
+Adding permission 'Permission object (85)'
+Adding permission 'Permission object (86)'
+Adding permission 'Permission object (87)'
+Adding permission 'Permission object (88)'
+Adding permission 'Permission object (89)'
+Adding permission 'Permission object (90)'
+Adding permission 'Permission object (91)'
+Adding permission 'Permission object (92)'
+Adding permission 'Permission object (93)'
+Adding permission 'Permission object (94)'
+Adding permission 'Permission object (95)'
+Adding permission 'Permission object (96)'
+Running post-migrate handlers for application registration
+Adding content type 'registration | registrationprofile'
+Adding permission 'Permission object (97)'
+Adding permission 'Permission object (98)'
+Adding permission 'Permission object (99)'
+Adding permission 'Permission object (100)'
+Running post-migrate handlers for application invoices
+Adding content type 'invoices | invoice'
+Adding permission 'Permission object (101)'
+Adding permission 'Permission object (102)'
+Adding permission 'Permission object (103)'
+Adding permission 'Permission object (104)'
+Running post-migrate handlers for application payments
+Adding content type 'payments | payment'
+Adding content type 'payments | paymentmethod'
+Adding permission 'Permission object (105)'
+Adding permission 'Permission object (106)'
+Adding permission 'Permission object (107)'
+Adding permission 'Permission object (108)'
+Adding permission 'Permission object (109)'
+Adding permission 'Permission object (110)'
+Adding permission 'Permission object (111)'
+Adding permission 'Permission object (112)'
+Created payment_added NoticeType
+Running post-migrate handlers for application stripe
+Adding content type 'stripe | stripeaccount'
+Adding content type 'stripe | charge'
+Adding permission 'Permission object (113)'
+Adding permission 'Permission object (114)'
+Adding permission 'Permission object (115)'
+Adding permission 'Permission object (116)'
+Adding permission 'Permission object (117)'
+Adding permission 'Permission object (118)'
+Adding permission 'Permission object (119)'
+Adding permission 'Permission object (120)'
+Running post-migrate handlers for application recurring_payments
+Adding content type 'recurring_payments | paymentprofile'
+Adding content type 'recurring_payments | paymenttransaction'
+Adding content type 'recurring_payments | recurringpayment'
+Adding content type 'recurring_payments | recurringpaymentinvoice'
+Adding permission 'Permission object (121)'
+Adding permission 'Permission object (122)'
+Adding permission 'Permission object (123)'
+Adding permission 'Permission object (124)'
+Adding permission 'Permission object (125)'
+Adding permission 'Permission object (126)'
+Adding permission 'Permission object (127)'
+Adding permission 'Permission object (128)'
+Adding permission 'Permission object (129)'
+Adding permission 'Permission object (130)'
+Adding permission 'Permission object (131)'
+Adding permission 'Permission object (132)'
+Adding permission 'Permission object (133)'
+Adding permission 'Permission object (134)'
+Adding permission 'Permission object (135)'
+Adding permission 'Permission object (136)'
+Running post-migrate handlers for application forms
+Adding content type 'forms | field'
+Adding content type 'forms | fieldentry'
+Adding content type 'forms | form'
+Adding content type 'forms | formentry'
+Adding content type 'forms | pricing'
+Adding permission 'Permission object (137)'
+Adding permission 'Permission object (138)'
+Adding permission 'Permission object (139)'
+Adding permission 'Permission object (140)'
+Adding permission 'Permission object (141)'
+Adding permission 'Permission object (142)'
+Adding permission 'Permission object (143)'
+Adding permission 'Permission object (144)'
+Adding permission 'Permission object (145)'
+Adding permission 'Permission object (146)'
+Adding permission 'Permission object (147)'
+Adding permission 'Permission object (148)'
+Adding permission 'Permission object (149)'
+Adding permission 'Permission object (150)'
+Adding permission 'Permission object (151)'
+Adding permission 'Permission object (152)'
+Adding permission 'Permission object (153)'
+Adding permission 'Permission object (154)'
+Adding permission 'Permission object (155)'
+Adding permission 'Permission object (156)'
+Running post-migrate handlers for application files
+Adding content type 'files | multiplefile'
+Adding content type 'files | file'
+Adding content type 'files | filescategory'
+Adding permission 'Permission object (157)'
+Adding permission 'Permission object (158)'
+Adding permission 'Permission object (159)'
+Adding permission 'Permission object (160)'
+Adding permission 'Permission object (161)'
+Adding permission 'Permission object (162)'
+Adding permission 'Permission object (163)'
+Adding permission 'Permission object (164)'
+Adding permission 'Permission object (165)'
+Adding permission 'Permission object (166)'
+Adding permission 'Permission object (167)'
+Adding permission 'Permission object (168)'
+Running post-migrate handlers for application user_groups
+Adding content type 'user_groups | groupmembership'
+Adding permission 'Permission object (169)'
+Adding permission 'Permission object (170)'
+Adding permission 'Permission object (171)'
+Adding permission 'Permission object (172)'
+Adding permission 'Permission object (173)'
+Adding permission 'Permission object (174)'
+Adding permission 'Permission object (175)'
+Adding permission 'Permission object (176)'
+Created group_added NoticeType
+Created group_deleted NoticeType
+Running post-migrate handlers for application perms
+Adding content type 'perms | objectpermission'
+Adding permission 'Permission object (177)'
+Adding permission 'Permission object (178)'
+Adding permission 'Permission object (179)'
+Adding permission 'Permission object (180)'
+Running post-migrate handlers for application profiles
+Adding content type 'profiles | profile'
+Adding content type 'profiles | userimport'
+Adding content type 'profiles | userimportdata'
+Adding permission 'Permission object (181)'
+Adding permission 'Permission object (182)'
+Adding permission 'Permission object (183)'
+Adding permission 'Permission object (184)'
+Adding permission 'Permission object (185)'
+Adding permission 'Permission object (186)'
+Adding permission 'Permission object (187)'
+Adding permission 'Permission object (188)'
+Adding permission 'Permission object (189)'
+Adding permission 'Permission object (190)'
+Adding permission 'Permission object (191)'
+Adding permission 'Permission object (192)'
+Created user_added NoticeType
+Created user_edited NoticeType
+Created user_deleted NoticeType
+Running post-migrate handlers for application meta
+Adding content type 'meta | meta'
+Adding permission 'Permission object (193)'
+Adding permission 'Permission object (194)'
+Adding permission 'Permission object (195)'
+Adding permission 'Permission object (196)'
+Running post-migrate handlers for application articles
+Adding content type 'articles | article'
+Adding permission 'Permission object (197)'
+Adding permission 'Permission object (198)'
+Adding permission 'Permission object (199)'
+Adding permission 'Permission object (200)'
+Created article_added NoticeType
+Created article_deleted NoticeType
+Running post-migrate handlers for application jobs
+Adding content type 'jobs | job'
+Adding content type 'jobs | jobpricing'
+Adding content type 'jobs | category'
+Adding permission 'Permission object (201)'
+Adding permission 'Permission object (202)'
+Adding permission 'Permission object (203)'
+Adding permission 'Permission object (204)'
+Adding permission 'Permission object (205)'
+Adding permission 'Permission object (206)'
+Adding permission 'Permission object (207)'
+Adding permission 'Permission object (208)'
+Adding permission 'Permission object (209)'
+Adding permission 'Permission object (210)'
+Adding permission 'Permission object (211)'
+Adding permission 'Permission object (212)'
+Created job_added NoticeType
+Created job_deleted NoticeType
+Created job_approved_user_notice NoticeType
+Running post-migrate handlers for application news
+Adding content type 'news | news'
+Adding content type 'news | newsimage'
+Adding permission 'Permission object (213)'
+Adding permission 'Permission object (214)'
+Adding permission 'Permission object (215)'
+Adding permission 'Permission object (216)'
+Adding permission 'Permission object (217)'
+Adding permission 'Permission object (218)'
+Adding permission 'Permission object (219)'
+Adding permission 'Permission object (220)'
+Created news_added NoticeType
+Created news_deleted NoticeType
+Running post-migrate handlers for application stories
+Adding content type 'stories | rotator'
+Adding content type 'stories | story'
+Adding content type 'stories | storyphoto'
+Adding permission 'Permission object (221)'
+Adding permission 'Permission object (222)'
+Adding permission 'Permission object (223)'
+Adding permission 'Permission object (224)'
+Adding permission 'Permission object (225)'
+Adding permission 'Permission object (226)'
+Adding permission 'Permission object (227)'
+Adding permission 'Permission object (228)'
+Adding permission 'Permission object (229)'
+Adding permission 'Permission object (230)'
+Adding permission 'Permission object (231)'
+Adding permission 'Permission object (232)'
+Running post-migrate handlers for application pages
+Adding content type 'pages | headerimage'
+Adding content type 'pages | page'
+Adding permission 'Permission object (233)'
+Adding permission 'Permission object (234)'
+Adding permission 'Permission object (235)'
+Adding permission 'Permission object (236)'
+Adding permission 'Permission object (237)'
+Adding permission 'Permission object (238)'
+Adding permission 'Permission object (239)'
+Adding permission 'Permission object (240)'
+Created page_added NoticeType
+Created page_edited NoticeType
+Created page_deleted NoticeType
+Running post-migrate handlers for application events
+Adding content type 'events | standardregform'
+Adding content type 'events | addon'
+Adding content type 'events | addonoption'
+Adding content type 'events | customregfield'
+Adding content type 'events | customregfieldentry'
+Adding content type 'events | customregform'
+Adding content type 'events | customregformentry'
+Adding content type 'events | discount'
+Adding content type 'events | event'
+Adding content type 'events | eventphoto'
+Adding content type 'events | organizer'
+Adding content type 'events | payment'
+Adding content type 'events | paymentmethod'
+Adding content type 'events | place'
+Adding content type 'events | recurringevent'
+Adding content type 'events | regaddon'
+Adding content type 'events | regaddonoption'
+Adding content type 'events | regconfpricing'
+Adding content type 'events | registrant'
+Adding content type 'events | registration'
+Adding content type 'events | registrationconfiguration'
+Adding content type 'events | speaker'
+Adding content type 'events | sponsor'
+Adding content type 'events | type'
+Adding content type 'events | typecolorset'
+Adding permission 'Permission object (241)'
+Adding permission 'Permission object (242)'
+Adding permission 'Permission object (243)'
+Adding permission 'Permission object (244)'
+Adding permission 'Permission object (245)'
+Adding permission 'Permission object (246)'
+Adding permission 'Permission object (247)'
+Adding permission 'Permission object (248)'
+Adding permission 'Permission object (249)'
+Adding permission 'Permission object (250)'
+Adding permission 'Permission object (251)'
+Adding permission 'Permission object (252)'
+Adding permission 'Permission object (253)'
+Adding permission 'Permission object (254)'
+Adding permission 'Permission object (255)'
+Adding permission 'Permission object (256)'
+Adding permission 'Permission object (257)'
+Adding permission 'Permission object (258)'
+Adding permission 'Permission object (259)'
+Adding permission 'Permission object (260)'
+Adding permission 'Permission object (261)'
+Adding permission 'Permission object (262)'
+Adding permission 'Permission object (263)'
+Adding permission 'Permission object (264)'
+Adding permission 'Permission object (265)'
+Adding permission 'Permission object (266)'
+Adding permission 'Permission object (267)'
+Adding permission 'Permission object (268)'
+Adding permission 'Permission object (269)'
+Adding permission 'Permission object (270)'
+Adding permission 'Permission object (271)'
+Adding permission 'Permission object (272)'
+Adding permission 'Permission object (273)'
+Adding permission 'Permission object (274)'
+Adding permission 'Permission object (275)'
+Adding permission 'Permission object (276)'
+Adding permission 'Permission object (277)'
+Adding permission 'Permission object (278)'
+Adding permission 'Permission object (279)'
+Adding permission 'Permission object (280)'
+Adding permission 'Permission object (281)'
+Adding permission 'Permission object (282)'
+Adding permission 'Permission object (283)'
+Adding permission 'Permission object (284)'
+Adding permission 'Permission object (285)'
+Adding permission 'Permission object (286)'
+Adding permission 'Permission object (287)'
+Adding permission 'Permission object (288)'
+Adding permission 'Permission object (289)'
+Adding permission 'Permission object (290)'
+Adding permission 'Permission object (291)'
+Adding permission 'Permission object (292)'
+Adding permission 'Permission object (293)'
+Adding permission 'Permission object (294)'
+Adding permission 'Permission object (295)'
+Adding permission 'Permission object (296)'
+Adding permission 'Permission object (297)'
+Adding permission 'Permission object (298)'
+Adding permission 'Permission object (299)'
+Adding permission 'Permission object (300)'
+Adding permission 'Permission object (301)'
+Adding permission 'Permission object (302)'
+Adding permission 'Permission object (303)'
+Adding permission 'Permission object (304)'
+Adding permission 'Permission object (305)'
+Adding permission 'Permission object (306)'
+Adding permission 'Permission object (307)'
+Adding permission 'Permission object (308)'
+Adding permission 'Permission object (309)'
+Adding permission 'Permission object (310)'
+Adding permission 'Permission object (311)'
+Adding permission 'Permission object (312)'
+Adding permission 'Permission object (313)'
+Adding permission 'Permission object (314)'
+Adding permission 'Permission object (315)'
+Adding permission 'Permission object (316)'
+Adding permission 'Permission object (317)'
+Adding permission 'Permission object (318)'
+Adding permission 'Permission object (319)'
+Adding permission 'Permission object (320)'
+Adding permission 'Permission object (321)'
+Adding permission 'Permission object (322)'
+Adding permission 'Permission object (323)'
+Adding permission 'Permission object (324)'
+Adding permission 'Permission object (325)'
+Adding permission 'Permission object (326)'
+Adding permission 'Permission object (327)'
+Adding permission 'Permission object (328)'
+Adding permission 'Permission object (329)'
+Adding permission 'Permission object (330)'
+Adding permission 'Permission object (331)'
+Adding permission 'Permission object (332)'
+Adding permission 'Permission object (333)'
+Adding permission 'Permission object (334)'
+Adding permission 'Permission object (335)'
+Adding permission 'Permission object (336)'
+Adding permission 'Permission object (337)'
+Adding permission 'Permission object (338)'
+Adding permission 'Permission object (339)'
+Adding permission 'Permission object (340)'
+Created event_added NoticeType
+Created event_edited NoticeType
+Created event_deleted NoticeType
+Created event_registration_confirmation NoticeType
+Created event_registration_cancelled NoticeType
+Created event_registration_end_recap NoticeType
+Created event_email_abandoned NoticeType
+Created event_email_abandoned_recap NoticeType
+Running post-migrate handlers for application photos
+Adding content type 'photos | albumcover'
+Adding content type 'photos | image'
+Adding content type 'photos | license'
+Adding content type 'photos | photoeffect'
+Adding content type 'photos | photoset'
+Adding content type 'photos | photosize'
+Adding content type 'photos | pool'
+Adding content type 'photos | watermark'
+Adding permission 'Permission object (341)'
+Adding permission 'Permission object (342)'
+Adding permission 'Permission object (343)'
+Adding permission 'Permission object (344)'
+Adding permission 'Permission object (345)'
+Adding permission 'Permission object (346)'
+Adding permission 'Permission object (347)'
+Adding permission 'Permission object (348)'
+Adding permission 'Permission object (349)'
+Adding permission 'Permission object (350)'
+Adding permission 'Permission object (351)'
+Adding permission 'Permission object (352)'
+Adding permission 'Permission object (353)'
+Adding permission 'Permission object (354)'
+Adding permission 'Permission object (355)'
+Adding permission 'Permission object (356)'
+Adding permission 'Permission object (357)'
+Adding permission 'Permission object (358)'
+Adding permission 'Permission object (359)'
+Adding permission 'Permission object (360)'
+Adding permission 'Permission object (361)'
+Adding permission 'Permission object (362)'
+Adding permission 'Permission object (363)'
+Adding permission 'Permission object (364)'
+Adding permission 'Permission object (365)'
+Adding permission 'Permission object (366)'
+Adding permission 'Permission object (367)'
+Adding permission 'Permission object (368)'
+Adding permission 'Permission object (369)'
+Adding permission 'Permission object (370)'
+Adding permission 'Permission object (371)'
+Adding permission 'Permission object (372)'
+Adding permission 'Permission object (373)'
+Running post-migrate handlers for application memberships
+Adding content type 'memberships | membershipapp'
+Adding content type 'memberships | membershipappfield'
+Adding content type 'memberships | membershipdefault'
+Adding content type 'memberships | membershipdemographic'
+Adding content type 'memberships | membershipfile'
+Adding content type 'memberships | membershipimport'
+Adding content type 'memberships | membershipimportdata'
+Adding content type 'memberships | membershipset'
+Adding content type 'memberships | membershiptype'
+Adding content type 'memberships | notice'
+Adding content type 'memberships | noticedefaultlogrecord'
+Adding content type 'memberships | noticelog'
+Adding permission 'Permission object (374)'
+Adding permission 'Permission object (375)'
+Adding permission 'Permission object (376)'
+Adding permission 'Permission object (377)'
+Adding permission 'Permission object (378)'
+Adding permission 'Permission object (379)'
+Adding permission 'Permission object (380)'
+Adding permission 'Permission object (381)'
+Adding permission 'Permission object (382)'
+Adding permission 'Permission object (383)'
+Adding permission 'Permission object (384)'
+Adding permission 'Permission object (385)'
+Adding permission 'Permission object (386)'
+Adding permission 'Permission object (387)'
+Adding permission 'Permission object (388)'
+Adding permission 'Permission object (389)'
+Adding permission 'Permission object (390)'
+Adding permission 'Permission object (391)'
+Adding permission 'Permission object (392)'
+Adding permission 'Permission object (393)'
+Adding permission 'Permission object (394)'
+Adding permission 'Permission object (395)'
+Adding permission 'Permission object (396)'
+Adding permission 'Permission object (397)'
+Adding permission 'Permission object (398)'
+Adding permission 'Permission object (399)'
+Adding permission 'Permission object (400)'
+Adding permission 'Permission object (401)'
+Adding permission 'Permission object (402)'
+Adding permission 'Permission object (403)'
+Adding permission 'Permission object (404)'
+Adding permission 'Permission object (405)'
+Adding permission 'Permission object (406)'
+Adding permission 'Permission object (407)'
+Adding permission 'Permission object (408)'
+Adding permission 'Permission object (409)'
+Adding permission 'Permission object (410)'
+Adding permission 'Permission object (411)'
+Adding permission 'Permission object (412)'
+Adding permission 'Permission object (413)'
+Adding permission 'Permission object (414)'
+Adding permission 'Permission object (415)'
+Adding permission 'Permission object (416)'
+Adding permission 'Permission object (417)'
+Adding permission 'Permission object (418)'
+Adding permission 'Permission object (419)'
+Adding permission 'Permission object (420)'
+Adding permission 'Permission object (421)'
+Adding permission 'Permission object (422)'
+Adding permission 'Permission object (423)'
+Created user_welcome NoticeType
+Created membership_joined_to_member NoticeType
+Created membership_joined_to_admin NoticeType
+Created membership_renewed_to_member NoticeType
+Created membership_renewed_to_admin NoticeType
+Created membership_approved_to_admin NoticeType
+Created membership_disapproved_to_admin NoticeType
+Created membership_approved_to_member NoticeType
+Created membership_disapproved_to_member NoticeType
+Created membership_notice_email NoticeType
+Created membership_corp_indiv_verify_email NoticeType
+Running post-migrate handlers for application corporate_memberships
+Adding content type 'corporate_memberships | corpmembership'
+Adding content type 'corporate_memberships | corpmembershipapp'
+Adding content type 'corporate_memberships | corpmembershipappfield'
+Adding content type 'corporate_memberships | corpmembershipauthdomain'
+Adding content type 'corporate_memberships | corpmembershipimport'
+Adding content type 'corporate_memberships | corpmembershipimportdata'
+Adding content type 'corporate_memberships | corpmembershiprep'
+Adding content type 'corporate_memberships | corporatemembershiptype'
+Adding content type 'corporate_memberships | corpprofile'
+Adding content type 'corporate_memberships | creator'
+Adding content type 'corporate_memberships | freepassesstat'
+Adding content type 'corporate_memberships | indivemailverification'
+Adding content type 'corporate_memberships | indivmembershiprenewentry'
+Adding content type 'corporate_memberships | notice'
+Adding content type 'corporate_memberships | noticelog'
+Adding content type 'corporate_memberships | noticelogrecord'
+Adding permission 'Permission object (424)'
+Adding permission 'Permission object (425)'
+Adding permission 'Permission object (426)'
+Adding permission 'Permission object (427)'
+Adding permission 'Permission object (428)'
+Adding permission 'Permission object (429)'
+Adding permission 'Permission object (430)'
+Adding permission 'Permission object (431)'
+Adding permission 'Permission object (432)'
+Adding permission 'Permission object (433)'
+Adding permission 'Permission object (434)'
+Adding permission 'Permission object (435)'
+Adding permission 'Permission object (436)'
+Adding permission 'Permission object (437)'
+Adding permission 'Permission object (438)'
+Adding permission 'Permission object (439)'
+Adding permission 'Permission object (440)'
+Adding permission 'Permission object (441)'
+Adding permission 'Permission object (442)'
+Adding permission 'Permission object (443)'
+Adding permission 'Permission object (444)'
+Adding permission 'Permission object (445)'
+Adding permission 'Permission object (446)'
+Adding permission 'Permission object (447)'
+Adding permission 'Permission object (448)'
+Adding permission 'Permission object (449)'
+Adding permission 'Permission object (450)'
+Adding permission 'Permission object (451)'
+Adding permission 'Permission object (452)'
+Adding permission 'Permission object (453)'
+Adding permission 'Permission object (454)'
+Adding permission 'Permission object (455)'
+Adding permission 'Permission object (456)'
+Adding permission 'Permission object (457)'
+Adding permission 'Permission object (458)'
+Adding permission 'Permission object (459)'
+Adding permission 'Permission object (460)'
+Adding permission 'Permission object (461)'
+Adding permission 'Permission object (462)'
+Adding permission 'Permission object (463)'
+Adding permission 'Permission object (464)'
+Adding permission 'Permission object (465)'
+Adding permission 'Permission object (466)'
+Adding permission 'Permission object (467)'
+Adding permission 'Permission object (468)'
+Adding permission 'Permission object (469)'
+Adding permission 'Permission object (470)'
+Adding permission 'Permission object (471)'
+Adding permission 'Permission object (472)'
+Adding permission 'Permission object (473)'
+Adding permission 'Permission object (474)'
+Adding permission 'Permission object (475)'
+Adding permission 'Permission object (476)'
+Adding permission 'Permission object (477)'
+Adding permission 'Permission object (478)'
+Adding permission 'Permission object (479)'
+Adding permission 'Permission object (480)'
+Adding permission 'Permission object (481)'
+Adding permission 'Permission object (482)'
+Adding permission 'Permission object (483)'
+Adding permission 'Permission object (484)'
+Adding permission 'Permission object (485)'
+Adding permission 'Permission object (486)'
+Adding permission 'Permission object (487)'
+Created corp_memb_added NoticeType
+Created corp_memb_added_user NoticeType
+Created corp_memb_edited NoticeType
+Created corp_memb_renewed NoticeType
+Created corp_memb_renewed_user NoticeType
+Created corp_memb_join_approved NoticeType
+Created corp_memb_renewal_approved NoticeType
+Created corp_memb_paid NoticeType
+Created corp_memb_notice_email NoticeType
+Running post-migrate handlers for application locations
+Adding content type 'locations | distance'
+Adding content type 'locations | location'
+Adding content type 'locations | locationimport'
+Adding permission 'Permission object (488)'
+Adding permission 'Permission object (489)'
+Adding permission 'Permission object (490)'
+Adding permission 'Permission object (491)'
+Adding permission 'Permission object (492)'
+Adding permission 'Permission object (493)'
+Adding permission 'Permission object (494)'
+Adding permission 'Permission object (495)'
+Adding permission 'Permission object (496)'
+Adding permission 'Permission object (497)'
+Adding permission 'Permission object (498)'
+Adding permission 'Permission object (499)'
+Running post-migrate handlers for application industries
+Adding content type 'industries | industry'
+Adding permission 'Permission object (500)'
+Adding permission 'Permission object (501)'
+Adding permission 'Permission object (502)'
+Adding permission 'Permission object (503)'
+Running post-migrate handlers for application regions
+Adding content type 'regions | region'
+Adding permission 'Permission object (504)'
+Adding permission 'Permission object (505)'
+Adding permission 'Permission object (506)'
+Adding permission 'Permission object (507)'
+Running post-migrate handlers for application educations
+Adding content type 'educations | education'
+Adding permission 'Permission object (508)'
+Adding permission 'Permission object (509)'
+Adding permission 'Permission object (510)'
+Adding permission 'Permission object (511)'
+Running post-migrate handlers for application careers
+Adding content type 'careers | career'
+Adding permission 'Permission object (512)'
+Adding permission 'Permission object (513)'
+Adding permission 'Permission object (514)'
+Adding permission 'Permission object (515)'
+Running post-migrate handlers for application make_payments
+Adding content type 'make_payments | makepayment'
+Adding permission 'Permission object (516)'
+Adding permission 'Permission object (517)'
+Adding permission 'Permission object (518)'
+Adding permission 'Permission object (519)'
+Created make_payment_added NoticeType
+Running post-migrate handlers for application accountings
+Adding content type 'accountings | acct'
+Adding content type 'accountings | acctentry'
+Adding content type 'accountings | accttran'
+Adding permission 'Permission object (520)'
+Adding permission 'Permission object (521)'
+Adding permission 'Permission object (522)'
+Adding permission 'Permission object (523)'
+Adding permission 'Permission object (524)'
+Adding permission 'Permission object (525)'
+Adding permission 'Permission object (526)'
+Adding permission 'Permission object (527)'
+Adding permission 'Permission object (528)'
+Adding permission 'Permission object (529)'
+Adding permission 'Permission object (530)'
+Adding permission 'Permission object (531)'
+Running post-migrate handlers for application emails
+Adding content type 'emails | email'
+Adding permission 'Permission object (532)'
+Adding permission 'Permission object (533)'
+Adding permission 'Permission object (534)'
+Adding permission 'Permission object (535)'
+Running post-migrate handlers for application email_blocks
+Adding content type 'email_blocks | emailblock'
+Adding permission 'Permission object (536)'
+Adding permission 'Permission object (537)'
+Adding permission 'Permission object (538)'
+Adding permission 'Permission object (539)'
+Adding permission 'Permission object (540)'
+Running post-migrate handlers for application contacts
+Adding content type 'contacts | address'
+Adding content type 'contacts | comment'
+Adding content type 'contacts | company'
+Adding content type 'contacts | contact'
+Adding content type 'contacts | email'
+Adding content type 'contacts | phone'
+Adding content type 'contacts | url'
+Adding permission 'Permission object (541)'
+Adding permission 'Permission object (542)'
+Adding permission 'Permission object (543)'
+Adding permission 'Permission object (544)'
+Adding permission 'Permission object (545)'
+Adding permission 'Permission object (546)'
+Adding permission 'Permission object (547)'
+Adding permission 'Permission object (548)'
+Adding permission 'Permission object (549)'
+Adding permission 'Permission object (550)'
+Adding permission 'Permission object (551)'
+Adding permission 'Permission object (552)'
+Adding permission 'Permission object (553)'
+Adding permission 'Permission object (554)'
+Adding permission 'Permission object (555)'
+Adding permission 'Permission object (556)'
+Adding permission 'Permission object (557)'
+Adding permission 'Permission object (558)'
+Adding permission 'Permission object (559)'
+Adding permission 'Permission object (560)'
+Adding permission 'Permission object (561)'
+Adding permission 'Permission object (562)'
+Adding permission 'Permission object (563)'
+Adding permission 'Permission object (564)'
+Adding permission 'Permission object (565)'
+Adding permission 'Permission object (566)'
+Adding permission 'Permission object (567)'
+Adding permission 'Permission object (568)'
+Running post-migrate handlers for application robots
+Adding content type 'robots | robot'
+Adding permission 'Permission object (569)'
+Adding permission 'Permission object (570)'
+Adding permission 'Permission object (571)'
+Adding permission 'Permission object (572)'
+Running post-migrate handlers for application versions
+Adding content type 'versions | version'
+Adding permission 'Permission object (573)'
+Adding permission 'Permission object (574)'
+Adding permission 'Permission object (575)'
+Adding permission 'Permission object (576)'
+Running post-migrate handlers for application event_logs
+Adding content type 'event_logs | eventlog'
+Adding content type 'event_logs | eventlogbasecolor'
+Adding content type 'event_logs | eventlogcolor'
+Adding permission 'Permission object (577)'
+Adding permission 'Permission object (578)'
+Adding permission 'Permission object (579)'
+Adding permission 'Permission object (580)'
+Adding permission 'Permission object (581)'
+Adding permission 'Permission object (582)'
+Adding permission 'Permission object (583)'
+Adding permission 'Permission object (584)'
+Adding permission 'Permission object (585)'
+Adding permission 'Permission object (586)'
+Adding permission 'Permission object (587)'
+Adding permission 'Permission object (588)'
+Running post-migrate handlers for application categories
+Adding content type 'categories | category'
+Adding content type 'categories | categoryitem'
+Adding permission 'Permission object (589)'
+Adding permission 'Permission object (590)'
+Adding permission 'Permission object (591)'
+Adding permission 'Permission object (592)'
+Adding permission 'Permission object (593)'
+Adding permission 'Permission object (594)'
+Adding permission 'Permission object (595)'
+Adding permission 'Permission object (596)'
+Running post-migrate handlers for application theme_editor
+Adding content type 'theme_editor | themefileversion'
+Adding permission 'Permission object (597)'
+Adding permission 'Permission object (598)'
+Adding permission 'Permission object (599)'
+Adding permission 'Permission object (600)'
+Running post-migrate handlers for application newsletters
+Adding content type 'newsletters | newsletter'
+Adding content type 'newsletters | newslettertemplate'
+Adding permission 'Permission object (601)'
+Adding permission 'Permission object (602)'
+Adding permission 'Permission object (603)'
+Adding permission 'Permission object (604)'
+Adding permission 'Permission object (605)'
+Adding permission 'Permission object (606)'
+Adding permission 'Permission object (607)'
+Adding permission 'Permission object (608)'
+Running post-migrate handlers for application redirects
+Adding content type 'redirects | redirect'
+Adding permission 'Permission object (609)'
+Adding permission 'Permission object (610)'
+Adding permission 'Permission object (611)'
+Adding permission 'Permission object (612)'
+Running post-migrate handlers for application directories
+Adding content type 'directories | directory'
+Adding content type 'directories | directorypricing'
+Adding content type 'directories | category'
+Adding permission 'Permission object (613)'
+Adding permission 'Permission object (614)'
+Adding permission 'Permission object (615)'
+Adding permission 'Permission object (616)'
+Adding permission 'Permission object (617)'
+Adding permission 'Permission object (618)'
+Adding permission 'Permission object (619)'
+Adding permission 'Permission object (620)'
+Adding permission 'Permission object (621)'
+Adding permission 'Permission object (622)'
+Adding permission 'Permission object (623)'
+Adding permission 'Permission object (624)'
+Created directory_added NoticeType
+Created directory_approved_user_notice NoticeType
+Created directory_deleted NoticeType
+Created directory_renewed NoticeType
+Created directory_renewal_eligible NoticeType
+Running post-migrate handlers for application help_files
+Adding content type 'help_files | helpfilemigration'
+Adding content type 'help_files | helpfile'
+Adding content type 'help_files | request'
+Adding content type 'help_files | topic'
+Adding permission 'Permission object (625)'
+Adding permission 'Permission object (626)'
+Adding permission 'Permission object (627)'
+Adding permission 'Permission object (628)'
+Adding permission 'Permission object (629)'
+Adding permission 'Permission object (630)'
+Adding permission 'Permission object (631)'
+Adding permission 'Permission object (632)'
+Adding permission 'Permission object (633)'
+Adding permission 'Permission object (634)'
+Adding permission 'Permission object (635)'
+Adding permission 'Permission object (636)'
+Adding permission 'Permission object (637)'
+Adding permission 'Permission object (638)'
+Adding permission 'Permission object (639)'
+Adding permission 'Permission object (640)'
+Created help_file_requested NoticeType
+Running post-migrate handlers for application resumes
+Adding content type 'resumes | resume'
+Adding permission 'Permission object (641)'
+Adding permission 'Permission object (642)'
+Adding permission 'Permission object (643)'
+Adding permission 'Permission object (644)'
+Created resume_added NoticeType
+Created resume_deleted NoticeType
+Running post-migrate handlers for application boxes
+Adding content type 'boxes | box'
+Adding permission 'Permission object (645)'
+Adding permission 'Permission object (646)'
+Adding permission 'Permission object (647)'
+Adding permission 'Permission object (648)'
+Running post-migrate handlers for application campaign_monitor
+Adding content type 'campaign_monitor | campaign'
+Adding content type 'campaign_monitor | groupqueue'
+Adding content type 'campaign_monitor | listmap'
+Adding content type 'campaign_monitor | subscriberqueue'
+Adding content type 'campaign_monitor | template'
+Adding permission 'Permission object (649)'
+Adding permission 'Permission object (650)'
+Adding permission 'Permission object (651)'
+Adding permission 'Permission object (652)'
+Adding permission 'Permission object (653)'
+Adding permission 'Permission object (654)'
+Adding permission 'Permission object (655)'
+Adding permission 'Permission object (656)'
+Adding permission 'Permission object (657)'
+Adding permission 'Permission object (658)'
+Adding permission 'Permission object (659)'
+Adding permission 'Permission object (660)'
+Adding permission 'Permission object (661)'
+Adding permission 'Permission object (662)'
+Adding permission 'Permission object (663)'
+Adding permission 'Permission object (664)'
+Adding permission 'Permission object (665)'
+Adding permission 'Permission object (666)'
+Adding permission 'Permission object (667)'
+Adding permission 'Permission object (668)'
+Running post-migrate handlers for application wp_importer
+Adding content type 'wp_importer | associatedfile'
+Adding content type 'wp_importer | blogimport'
+Adding permission 'Permission object (669)'
+Adding permission 'Permission object (670)'
+Adding permission 'Permission object (671)'
+Adding permission 'Permission object (672)'
+Adding permission 'Permission object (673)'
+Adding permission 'Permission object (674)'
+Adding permission 'Permission object (675)'
+Adding permission 'Permission object (676)'
+Running post-migrate handlers for application wp_exporter
+Adding content type 'wp_exporter | xmlexport'
+Adding permission 'Permission object (677)'
+Adding permission 'Permission object (678)'
+Adding permission 'Permission object (679)'
+Adding permission 'Permission object (680)'
+Running post-migrate handlers for application discounts
+Adding content type 'discounts | discount'
+Adding content type 'discounts | discountuse'
+Adding permission 'Permission object (681)'
+Adding permission 'Permission object (682)'
+Adding permission 'Permission object (683)'
+Adding permission 'Permission object (684)'
+Adding permission 'Permission object (685)'
+Adding permission 'Permission object (686)'
+Adding permission 'Permission object (687)'
+Adding permission 'Permission object (688)'
+Running post-migrate handlers for application metrics
+Adding content type 'metrics | metric'
+Adding permission 'Permission object (689)'
+Adding permission 'Permission object (690)'
+Adding permission 'Permission object (691)'
+Adding permission 'Permission object (692)'
+Running post-migrate handlers for application navs
+Adding content type 'navs | nav'
+Adding content type 'navs | navitem'
+Adding permission 'Permission object (693)'
+Adding permission 'Permission object (694)'
+Adding permission 'Permission object (695)'
+Adding permission 'Permission object (696)'
+Adding permission 'Permission object (697)'
+Adding permission 'Permission object (698)'
+Adding permission 'Permission object (699)'
+Adding permission 'Permission object (700)'
+Running post-migrate handlers for application tendenci_guide
+Adding content type 'tendenci_guide | guide'
+Adding permission 'Permission object (701)'
+Adding permission 'Permission object (702)'
+Adding permission 'Permission object (703)'
+Adding permission 'Permission object (704)'
+Running post-migrate handlers for application exports
+Adding content type 'exports | export'
+Adding permission 'Permission object (705)'
+Adding permission 'Permission object (706)'
+Adding permission 'Permission object (707)'
+Adding permission 'Permission object (708)'
+Running post-migrate handlers for application ics
+Adding content type 'ics | ics'
+Adding permission 'Permission object (709)'
+Adding permission 'Permission object (710)'
+Adding permission 'Permission object (711)'
+Adding permission 'Permission object (712)'
+Running post-migrate handlers for application imports
+Adding content type 'imports | import'
+Adding permission 'Permission object (713)'
+Adding permission 'Permission object (714)'
+Adding permission 'Permission object (715)'
+Adding permission 'Permission object (716)'
+Running post-migrate handlers for application handler404
+Adding content type 'handler404 | report404'
+Adding permission 'Permission object (717)'
+Adding permission 'Permission object (718)'
+Adding permission 'Permission object (719)'
+Adding permission 'Permission object (720)'
+Running post-migrate handlers for application reports
+Adding content type 'reports | report'
+Adding content type 'reports | run'
+Adding permission 'Permission object (721)'
+Adding permission 'Permission object (722)'
+Adding permission 'Permission object (723)'
+Adding permission 'Permission object (724)'
+Adding permission 'Permission object (725)'
+Adding permission 'Permission object (726)'
+Adding permission 'Permission object (727)'
+Adding permission 'Permission object (728)'
+Running post-migrate handlers for application dashboard
+Adding content type 'dashboard | dashboardstat'
+Adding content type 'dashboard | dashboardstattype'
+Adding permission 'Permission object (729)'
+Adding permission 'Permission object (730)'
+Adding permission 'Permission object (731)'
+Adding permission 'Permission object (732)'
+Adding permission 'Permission object (733)'
+Adding permission 'Permission object (734)'
+Adding permission 'Permission object (735)'
+Adding permission 'Permission object (736)'
+Running post-migrate handlers for application social_media
+Running post-migrate handlers for application announcements
+Adding content type 'announcements | emergencyannouncement'
+Adding permission 'Permission object (737)'
+Adding permission 'Permission object (738)'
+Adding permission 'Permission object (739)'
+Adding permission 'Permission object (740)'
+Running post-migrate handlers for application forums
+Adding content type 'forums | attachment'
+Adding content type 'forums | category'
+Adding content type 'forums | forum'
+Adding content type 'forums | forumreadtracker'
+Adding content type 'forums | pollanswer'
+Adding content type 'forums | pollansweruser'
+Adding content type 'forums | post'
+Adding content type 'forums | profile'
+Adding content type 'forums | topic'
+Adding content type 'forums | topicreadtracker'
+Adding permission 'Permission object (741)'
+Adding permission 'Permission object (742)'
+Adding permission 'Permission object (743)'
+Adding permission 'Permission object (744)'
+Adding permission 'Permission object (745)'
+Adding permission 'Permission object (746)'
+Adding permission 'Permission object (747)'
+Adding permission 'Permission object (748)'
+Adding permission 'Permission object (749)'
+Adding permission 'Permission object (750)'
+Adding permission 'Permission object (751)'
+Adding permission 'Permission object (752)'
+Adding permission 'Permission object (753)'
+Adding permission 'Permission object (754)'
+Adding permission 'Permission object (755)'
+Adding permission 'Permission object (756)'
+Adding permission 'Permission object (757)'
+Adding permission 'Permission object (758)'
+Adding permission 'Permission object (759)'
+Adding permission 'Permission object (760)'
+Adding permission 'Permission object (761)'
+Adding permission 'Permission object (762)'
+Adding permission 'Permission object (763)'
+Adding permission 'Permission object (764)'
+Adding permission 'Permission object (765)'
+Adding permission 'Permission object (766)'
+Adding permission 'Permission object (767)'
+Adding permission 'Permission object (768)'
+Adding permission 'Permission object (769)'
+Adding permission 'Permission object (770)'
+Adding permission 'Permission object (771)'
+Adding permission 'Permission object (772)'
+Adding permission 'Permission object (773)'
+Adding permission 'Permission object (774)'
+Adding permission 'Permission object (775)'
+Adding permission 'Permission object (776)'
+Adding permission 'Permission object (777)'
+Adding permission 'Permission object (778)'
+Adding permission 'Permission object (779)'
+Adding permission 'Permission object (780)'
+Running post-migrate handlers for application committees
+Adding content type 'committees | committee'
+Adding content type 'committees | officer'
+Adding content type 'committees | position'
+Adding permission 'Permission object (781)'
+Adding permission 'Permission object (782)'
+Adding permission 'Permission object (783)'
+Adding permission 'Permission object (784)'
+Adding permission 'Permission object (785)'
+Adding permission 'Permission object (786)'
+Adding permission 'Permission object (787)'
+Adding permission 'Permission object (788)'
+Adding permission 'Permission object (789)'
+Adding permission 'Permission object (790)'
+Adding permission 'Permission object (791)'
+Adding permission 'Permission object (792)'
+Running post-migrate handlers for application case_studies
+Adding content type 'case_studies | casestudy'
+Adding content type 'case_studies | image'
+Adding content type 'case_studies | service'
+Adding content type 'case_studies | technology'
+Adding permission 'Permission object (793)'
+Adding permission 'Permission object (794)'
+Adding permission 'Permission object (795)'
+Adding permission 'Permission object (796)'
+Adding permission 'Permission object (797)'
+Adding permission 'Permission object (798)'
+Adding permission 'Permission object (799)'
+Adding permission 'Permission object (800)'
+Adding permission 'Permission object (801)'
+Adding permission 'Permission object (802)'
+Adding permission 'Permission object (803)'
+Adding permission 'Permission object (804)'
+Adding permission 'Permission object (805)'
+Adding permission 'Permission object (806)'
+Adding permission 'Permission object (807)'
+Adding permission 'Permission object (808)'
+Running post-migrate handlers for application donations
+Adding content type 'donations | donation'
+Adding permission 'Permission object (809)'
+Adding permission 'Permission object (810)'
+Adding permission 'Permission object (811)'
+Adding permission 'Permission object (812)'
+Created donation_added NoticeType
+Running post-migrate handlers for application speakers
+Adding content type 'speakers | speaker'
+Adding content type 'speakers | speakerfile'
+Adding content type 'speakers | track'
+Adding permission 'Permission object (813)'
+Adding permission 'Permission object (814)'
+Adding permission 'Permission object (815)'
+Adding permission 'Permission object (816)'
+Adding permission 'Permission object (817)'
+Adding permission 'Permission object (818)'
+Adding permission 'Permission object (819)'
+Adding permission 'Permission object (820)'
+Adding permission 'Permission object (821)'
+Adding permission 'Permission object (822)'
+Adding permission 'Permission object (823)'
+Adding permission 'Permission object (824)'
+Running post-migrate handlers for application staff
+Adding content type 'staff | department'
+Adding content type 'staff | position'
+Adding content type 'staff | staff'
+Adding content type 'staff | stafffile'
+Adding permission 'Permission object (825)'
+Adding permission 'Permission object (826)'
+Adding permission 'Permission object (827)'
+Adding permission 'Permission object (828)'
+Adding permission 'Permission object (829)'
+Adding permission 'Permission object (830)'
+Adding permission 'Permission object (831)'
+Adding permission 'Permission object (832)'
+Adding permission 'Permission object (833)'
+Adding permission 'Permission object (834)'
+Adding permission 'Permission object (835)'
+Adding permission 'Permission object (836)'
+Adding permission 'Permission object (837)'
+Adding permission 'Permission object (838)'
+Adding permission 'Permission object (839)'
+Adding permission 'Permission object (840)'
+Running post-migrate handlers for application studygroups
+Adding content type 'studygroups | officer'
+Adding content type 'studygroups | position'
+Adding content type 'studygroups | studygroup'
+Adding permission 'Permission object (841)'
+Adding permission 'Permission object (842)'
+Adding permission 'Permission object (843)'
+Adding permission 'Permission object (844)'
+Adding permission 'Permission object (845)'
+Adding permission 'Permission object (846)'
+Adding permission 'Permission object (847)'
+Adding permission 'Permission object (848)'
+Adding permission 'Permission object (849)'
+Adding permission 'Permission object (850)'
+Adding permission 'Permission object (851)'
+Adding permission 'Permission object (852)'
+Running post-migrate handlers for application videos
+Adding content type 'videos | category'
+Adding content type 'videos | oembedlycache'
+Adding content type 'videos | video'
+Adding content type 'videos | videotype'
+Adding permission 'Permission object (853)'
+Adding permission 'Permission object (854)'
+Adding permission 'Permission object (855)'
+Adding permission 'Permission object (856)'
+Adding permission 'Permission object (857)'
+Adding permission 'Permission object (858)'
+Adding permission 'Permission object (859)'
+Adding permission 'Permission object (860)'
+Adding permission 'Permission object (861)'
+Adding permission 'Permission object (862)'
+Adding permission 'Permission object (863)'
+Adding permission 'Permission object (864)'
+Adding permission 'Permission object (865)'
+Adding permission 'Permission object (866)'
+Adding permission 'Permission object (867)'
+Adding permission 'Permission object (868)'
+Running post-migrate handlers for application testimonials
+Adding content type 'testimonials | testimonial'
+Adding content type 'testimonials | testimonialphoto'
+Adding permission 'Permission object (869)'
+Adding permission 'Permission object (870)'
+Adding permission 'Permission object (871)'
+Adding permission 'Permission object (872)'
+Adding permission 'Permission object (873)'
+Adding permission 'Permission object (874)'
+Adding permission 'Permission object (875)'
+Adding permission 'Permission object (876)'
+Running post-migrate handlers for application social_services
+Adding content type 'social_services | reliefassessment'
+Adding content type 'social_services | skillset'
+Adding permission 'Permission object (877)'
+Adding permission 'Permission object (878)'
+Adding permission 'Permission object (879)'
+Adding permission 'Permission object (880)'
+Adding permission 'Permission object (881)'
+Adding permission 'Permission object (882)'
+Adding permission 'Permission object (883)'
+Adding permission 'Permission object (884)'
+Running post-migrate handlers for application explorer_extensions
+Adding content type 'explorer_extensions | databasedumpfile'
+Adding permission 'Permission object (885)'
+Adding permission 'Permission object (886)'
+Adding permission 'Permission object (887)'
+Adding permission 'Permission object (888)'
+Running post-migrate handlers for application explorer
+Adding content type 'explorer | query'
+Adding content type 'explorer | querylog'
+Adding permission 'Permission object (889)'
+Adding permission 'Permission object (890)'
+Adding permission 'Permission object (891)'
+Adding permission 'Permission object (892)'
+Adding permission 'Permission object (893)'
+Adding permission 'Permission object (894)'
+Adding permission 'Permission object (895)'
+Adding permission 'Permission object (896)'

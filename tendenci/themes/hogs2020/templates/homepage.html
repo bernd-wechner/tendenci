@@ -1,0 +1,157 @@
+<!-- Tendenci Specific Load Tags (Delete as Needed)
+   =========================================================== -->
+{% load base_filters %}
+{% load base_tags %}
+{% load theme_tags %}
+{% load story_tags %}
+{% load box_tags %}
+{% load forms_tags %}
+{% load news_tags %}
+{% load article_tags %}
+{% load photo_tags %}
+{% load event_tags %}
+{% load event_filters %}
+{% theme_extends "base.html" %}
+
+<!-- Meta Tags (for optimal SEO)
+   =========================================================== -->
+{% block title %}{{ block.super }} | {{ SITE_GLOBAL_SITEPRIMARYKEYWORDS }}{% endblock %}
+{% block meta_description %}{{ block.super }}{% endblock %}
+{% block meta_keywords %}{{ block.super }}, {{ SITE_GLOBAL_SITESECONDARYKEYWORDS }}{% endblock %}
+
+<!-- Start of the Body
+   =========================================================== -->
+{% block body_ids %}home{% endblock body_ids %}
+{% block body_classes %}home{% endblock body_classes %}
+
+{% block html_body %}
+    {% theme_include "header.html" %} 
+
+    <div id="page-top-home" role="main">
+        <section id="about-us">
+            <div class="container">
+                <div class="row col-md vertical-align">
+                    <div class="col-md-5">
+                        {% box 3 %}
+                    </div>
+    
+                    <div class="col-md-7">
+                        {% box 4 %}
+                    </div>
+                </div>
+            </div>
+        </section> <!-- end: about-us -->
+        
+        <section id="upcoming-events">
+            <div class="container">
+                <div class="row">
+	                <div class="col-md-5">
+	                    {% box 5 %}
+	                    {% box 6 %}
+	                </div>
+	                <div class="col-md-6 col-md-offset-1 jumbotron">
+	                    {% list_events as events_list limit=3 order="current_and_upcoming" %}
+	                        <ul class="list-unstyled">
+	                            {% for event in events_list %}
+	                                <li>
+	                                    <a href="{{ event.get_absolute_url }}">
+	                                        <h3>
+	                                            {{ event.title }}
+	                                        </h3>
+	                                    </a>
+	                                    <p>{{ event.start_dt|date:"F j, Y - P" }}</p>
+	                                    <h5>{{ event.place.name }}</h5>
+	                                </li>
+	                            {% empty %}
+	                                {% trans 'Events will be shown here. <a href="/events/add/">Start adding events now!</a>' %}
+	                            {% endfor %}
+	                        </ul>
+	                        {% if event_list %}
+	                            <a href="{% url 'event.search' %}">{% trans 'View more events' %} »</a>
+	                        {% endif %}
+	                </div>
+                </div>
+            </div> <!-- end: container -->
+        </section> <!-- end: upcoming-events -->
+
+        <section id="latest-news">
+            <div class="container">
+                <div class="row">
+	                <div class="col">
+                		{% box 7 %}
+	                </div>
+                <div>
+                <div class="row">
+	             	{% list_news as news_list limit=3 %}
+                    <ul class="list-unstyled">
+						{% for news_item in news_list %}
+						<li>
+						    <div class="col-md-4 col-sm-12 col-xs-12 text-left">
+						        <!-- news-image -->
+						        {% if news_item.thumbnail %}
+							        <a href="{{ news_item.get_absolute_url }}">
+							            <div class="news-item-thumbnail">
+							                <img class="img" src="{% image_url news_item.thumbnail %}" alt="{{ news_item.headline|striptags|safe }}" style="width:100%;height:auto;" />
+							            </div>
+							        </a>
+						        {% else %}
+							        <a href="{{ news_item.get_absolute_url }}">
+							            <div class="news-item-thumbnail-auto">
+							                <img src="{% static 'quince.jpg' %}" style="width:100%;height:auto;" />
+							            </div>
+							        </a>
+						        {% endif %} <!-- end news-image -->
+						        
+						        <a href="{{ news_item.get_absolute_url }}">
+						            <h3>{% blocktrans with h=news_item.headline %}
+						                {{ h }}
+						                {% endblocktrans %}
+						            </h3>
+						        </a>
+						        <br>
+						        <p>
+						            {% blocktrans with c=news_item.summary|striptags|safe|truncatewords:"30" %}
+						            {{ c }}
+						            {% endblocktrans %}
+						        </p>
+						    </div>
+						</li>
+						{% endfor %}
+                    </ul>
+                    {% if news_list %}
+                        <a href="{% url 'news.search' %}">{% trans 'View more news' %} »</a>
+                    {% endif %}
+            	</div>
+            </div>
+        </section> <!-- end: upcoming-events -->
+    
+        <!-- Footer starts
+          =========================================================== -->
+        <footer>
+            {% theme_include 'footer.html' %}
+        </footer>
+        <!-- Footer Ends -->
+    </div>
+{% endblock %}
+<!-- Ends the Body -->
+
+{% block extra_body %}
+{{ super.block }}
+<!-- Bootstrap core JavaScript
+   ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script>
+    ! function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + "://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }
+    (document, "script", "twitter-wjs");
+</script>
+
+{% endblock extra_body %}

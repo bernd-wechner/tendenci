@@ -1,0 +1,168 @@
+[
+{
+    "fields": {
+        "status": true,
+        "create_dt": "2020-10-12T22:00:00.000",
+        "megamenu": false,
+        "description": "The main menu system.",
+        "update_dt": "2020-10-12T22:00:00.000",
+        "allow_user_edit": false,
+        "allow_user_view": false,
+        "creator": null,
+        "allow_member_view": false,
+        "entity": 1,
+        "owner_username": "admin",
+        "owner": 1,
+        "title": "Main Navigation",
+        "status_detail": "active",
+        "creator_username": "admin",
+        "allow_member_edit": false,
+        "allow_anonymous_view": true
+    },
+    "model": "navs.nav",
+    "pk": 1
+},
+{
+    "fields": {
+        "status": true,
+        "create_dt": "2020-10-12T22:00:00.000",
+        "megamenu": false,
+        "description": "Sub menu system for special utilities",
+        "update_dt": "2020-10-12T22:00:00.000",
+        "allow_user_edit": false,
+        "allow_user_view": false,
+        "creator": 1,
+        "allow_member_view": false,
+        "entity": 1,
+        "owner_username": "admin",
+        "owner": 1,
+        "title": "Utility Navigation",
+        "status_detail": "active",
+        "creator_username": "admin",
+        "allow_member_edit": false,
+        "allow_anonymous_view": true
+    },
+    "model": "navs.nav",
+    "pk": 2
+},
+{
+    "fields": {
+        "title": "Home",
+        "url": "/",
+        "level": 1,
+        "label": "Home",
+        "new_window": false,
+        "nav": 1,
+        "position": 1,
+        "page": null,
+        "css": ""
+    },
+    "model": "navs.navitem",
+    "pk": 1
+},
+{
+    "fields": {
+        "title": "About Us",
+        "url": "/about/",
+        "level": 0,
+        "label": "About Us",
+        "new_window": false,
+        "nav": 1,
+        "position": 2,
+        "page": 1,
+        "css": ""
+    },
+    "model": "navs.navitem",
+    "pk": 2
+},
+{
+    "fields": {
+        "title": "Events",
+        "url": "/events/month/",
+        "level": 1,
+        "label": "Events",
+        "new_window": false,
+        "nav": 1,
+        "position": 3,
+        "page": null,
+        "css": ""
+    },
+    "model": "navs.navitem",
+    "pk": 3
+},
+{
+    "fields": {
+        "title": "",
+        "url": "/news/",
+        "level": 1,
+        "label": "News",
+        "new_window": false,
+        "nav": 1,
+        "position": 4,
+        "page": null,
+        "css": ""
+    },
+    "model": "navs.navitem",
+    "pk": 4
+},
+{
+    "fields": {
+        "title": "",
+        "url": "/articles/",
+        "level": 0,
+        "label": "Articles",
+        "new_window": false,
+        "nav": 1,
+        "position": 13,
+        "page": null,
+        "css": ""
+    },
+    "model": "navs.navitem",
+    "pk": 5
+},
+{
+    "fields": {
+        "title": "",
+        "url": "/join/",
+        "level": 0,
+        "label": "Join",
+        "new_window": false,
+        "nav": 2,
+        "position": 1,
+        "page": 2,
+        "css": ""
+    },
+    "model": "navs.navitem",
+    "pk": 6
+},
+{
+    "fields": {
+        "title": "",
+        "url": "/contact/",
+        "level": 0,
+        "label": "Contact Us",
+        "new_window": false,
+        "nav": 2,
+        "position": 2,
+        "page": null,
+        "css": ""
+    },
+    "model": "navs.navitem",
+    "pk": 7
+},
+{
+    "fields": {
+        "title": "",
+        "url": "/accounts/login/",
+        "level": 1,
+        "label": "Login",
+        "new_window": false,
+        "nav": 2,
+        "position": 3,
+        "page": null,
+        "css": ""
+    },
+    "model": "navs.navitem",
+    "pk": 8
+}
+]
