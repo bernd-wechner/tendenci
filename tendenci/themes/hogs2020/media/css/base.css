@@ -6,7 +6,7 @@ body {
 #page-top a:hover {
   text-decoration: none;
 }
-#page-top img:not(.square. .full) {
+#page-top img:not(.square .full) {
   display: block;
   vertical-align: middle;
   max-width: 100%;
@@ -633,11 +633,39 @@ label.required:after {
     color: gold;
 }
 
-/* HoGS Site 
+/* HoGS Site
+
+.vertical-centre: 
+The problem, how to have to griod columsn side by side, 
+HoGS logo on left and About us text on the right,that text 
+vertically centered relative to the image. Not easy in 
+Boostrap 3 as it happens. A clue is here:
+
+http://dansuleski.com/vertically-align-with-bootstrap-3/
+
+But that doesn't quite work. For some odd reason the text cell 
+wraps to a new row (as it should on a phone) even on a wide 
+screen). I asked here:
+
+https://stackoverflow.com/questions/64397633
+
+and it turns out a right-margin of -4 and it works. No idea 
+quite why but some discussion here:
+
+https://stackoverflow.com/questions/20005278 
+
+And I still don't quite get it. But it works. The -ve margin
+prevents it wrong wrpping the second column onto a new row on
+wide screens. So it is encoded.
+ 
 =============== */
-.vertical-align {
-    display: flex;
-    align-items: center;
+
+
+.vertical-centre {
+    float: none !important;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -4px;
 }
 
 table.hogs {
