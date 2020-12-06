@@ -1,4 +1,5 @@
 {% extends "reports/base.html" %}
+{% load base_filters %}
 
 {% block content %}
 <div class="page-header">
@@ -8,17 +9,28 @@
 {% if members %}
 <p><a class="btn btn-primary" href="{% url "reports-members-quick-list" %}?output=csv">
     {% trans 'Download CSV File' %}</a></p>
+    <p>{{ members | length }} active members</p>
     <table class="table table-tendenci-reports">
         <tr>
-            <th>{% trans "Last Name" %}</th>
-            <th>{% trans "First Name" %}</th>
-            <th>{% trans "Company" %}</th>
+            <th><a href="{{ request | with_parameters:'order_by=member_number_int' }}">{% trans "Member Number" %}</a></th>
+            <th><a href="{{ request | with_parameters:'order_by=membership_type' }}">{% trans "Membership Type" %}</a></th>
+            <th><a href="{{ request | with_parameters:'order_by=user__last_name' }}">{% trans "Last Name" %}</a></th>
+            <th><a href="{{ request | with_parameters:'order_by=user__first_name' }}">{% trans "First Name" %}</a></th>
+            <th><a href="{{ request | with_parameters:'order_by=user__profile__company' }}">{% trans "Company" %}</a></th>
+            <th>{% trans "Groups" %}</th>
         </tr>
         {% for member in members %}
         <tr>
+            <td>{{ member.member_number }}</td>
+            <td>{{ member.membership_type }}</td>
             <td>{{ member.user.last_name }}</td>
             <td>{{ member.user.first_name }}</td>
             <td>{{ member.user.profile.company }}</td>
+            <td>
+				{% for group in member.user.group_set.all %}
+				    {{ group.name }} {% if not forloop.last %}, {% endif %} 
+				{% endfor %}
+			</td>
         </tr>
         {% endfor %}
     </table>
