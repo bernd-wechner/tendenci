@@ -18,13 +18,14 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
 from django.http import Http404, HttpResponseRedirect, HttpResponse
-from django.db.models.fields import AutoField
+from django.db.models.fields import AutoField, PositiveIntegerField 
 from django.utils.encoding import smart_str
 import simplejson
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import ForeignKey, OneToOneField
 from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
+from django.db.models.functions import Cast
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext_lazy as _
@@ -2333,16 +2334,27 @@ def report_member_roster(request, template_name='reports/membership_roster.html'
 def report_member_quick_list(request, template_name='reports/membership_quick_list.html'):
     """ Table view of current members fname, lname and company only.
     """
-    members = MembershipDefault.objects.filter(status=1, status_detail="active").order_by('user__last_name')
+
+    order_by = request.GET.get('order_by', 'user__last_name')
+    
+    members = MembershipDefault.objects.filter(status=1, status_detail="active")
+    
+    if order_by == 'member_number_int':
+        members = members.annotate(member_number_int=Cast('member_number', PositiveIntegerField()))
+        
+    members = members.order_by(order_by)
 
     # returns csv response ---------------
     ouput = request.GET.get('output', '')
     if ouput == 'csv':
 
         table_header = [
+            'member number',
+            'membership type',
             'first name',
             'last name',
-            'company'
+            'company',
+            'groups'
         ]
 
         table_data = []
@@ -2351,10 +2363,14 @@ def report_member_quick_list(request, template_name='reports/membership_quick_li
                 company = mem.user.profile.company
             else:
                 company = ''
+            
             table_data.append([
+                mem.member_number,
+                mem.membership_type,
                 mem.user.first_name,
                 mem.user.last_name,
-                company
+                company,
+                [group.name for group in mem.user.group_set.all()]
             ])
 
         return render_csv(
