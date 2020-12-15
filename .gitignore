@@ -40,3 +40,7 @@ docs/local/
 /build
 /dist
 *.egg-info
+
+tendenci-live
+
+tendenci/apps/help_files/publish
