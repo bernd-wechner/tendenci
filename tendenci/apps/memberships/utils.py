@@ -1110,7 +1110,7 @@ class ImportMembDefault(object):
                              'EST': 'US/Eastern',
                              'CST': 'US/Central',
                              'MST': 'US/Mountain',
-                             'AKST': 'US/Alaska',           
+                             'AKST': 'US/Alaska',
                              'PST': 'US/Pacific',
                              'GMT': 'UTC'
                              }
@@ -1142,7 +1142,7 @@ class ImportMembDefault(object):
         for app in self.membership_apps:
             mt_ids = app.membership_types.all().values_list('id', flat=True)
             for mt_id in self.membership_type_ids:
-                if mt_id in mt_ids:     
+                if mt_id in mt_ids:
                     if app.use_for_corp:
                         self.membership_types_to_apps_map[
                                     mt_id][1].append(app.id)
