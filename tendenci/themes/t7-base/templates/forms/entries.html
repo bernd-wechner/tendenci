@@ -40,8 +40,6 @@
         
         <li class="pull-left">
           <a href="{{ entry.get_absolute_url }}">
-             Can edit: {{can_edit}}<br>
-             Can delete: {{can_delete}}<br>
           	{% for row in entry.summary %}
             	{{ row }}<br>
           	{% endfor %}
