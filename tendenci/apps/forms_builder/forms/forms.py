@@ -116,7 +116,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                     if instance_field:
                         instance_fields[field_key] = instance_field
                         field_args["initial"] = instance_field.value 
-                    elif gfield_key in session:
+                    elif field.remember and gfield_key in session:
                         field_args["initial"] = session[gfield_key]
                     else: 
                         field_args["initial"] = field.default
@@ -283,7 +283,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                 field_entry = FieldEntry(field_id = field.id, entry=entry, value = value)
                 field_entry.save()
 
-            if self.session:
+            if field.remember and self.session:
                 self.session[gfield_key] = value
 
         for field in self.auto_fields:
