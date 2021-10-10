@@ -68,8 +68,8 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             instance_fields = {}
             
             for field in form_fields:
-                field_key = "field_%s" % field.id
-                gfield_key = form.form.slug + "." + field_key
+                field_key = self.field_key(field)
+                gfield_key = self.field_key(field, True)
                 if "/" in field.field_type:
                     field_class, field_widget = field.field_type.split("/")
                 else:
@@ -226,6 +226,12 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             self.fields['captcha'] = CustomCatpchaField(label=_('Type the code below'))
 
         self.add_form_control_class()
+        
+    def field_key(self, field, is_global=False):
+        key = "field_%s" % field.id
+        if is_global:
+            key = self.form.slug + "." + key
+        return key 
 
     def clean_pricing_option(self):
         pricing_pk = int(self.cleaned_data['pricing_option'])
@@ -262,8 +268,8 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             
         entry.save()
         for field in self.form_fields:
-            field_key = "field_%s" % field.id
-            gfield_key = self.form.slug + "." + field_key
+            field_key = self.field_key(field)
+            gfield_key = self.field_key(field, True)
             
             value = self.cleaned_data[field_key]
             entry_id = self.cleaned_data.get(field_key + "-id", None)
