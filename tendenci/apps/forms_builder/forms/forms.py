@@ -47,7 +47,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
         model = FormEntry
         exclude = ("form", "entry_time", "entry_path", "payment_method", "pricing", 'custom_price',  "creator")
 
-    def __init__(self, form, user, *args, **kwargs):
+    def __init__(self, form, user, session={}, *args, **kwargs):
         """
         Dynamically add each of the form fields for the given form model
         instance and its related field model instances.
@@ -57,6 +57,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
         self.form = form
         self.form_fields = (form.fields.all() if self.instance else form.fields.visible()).order_by('position')
         self.auto_fields = form.fields.auto_fields().order_by('position')
+        self.session = session
         super(FormForForm, self).__init__(*args, **kwargs)
 
         def add_fields(form, form_fields):
@@ -64,6 +65,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             
             for field in form_fields:
                 field_key = "field_%s" % field.id
+                gfield_key = form.form.slug + "." + field_key
                 if "/" in field.field_type:
                     field_class, field_widget = field.field_type.split("/")
                 else:
@@ -114,6 +116,8 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                     if instance_field:
                         instance_fields[field_key] = instance_field
                         field_args["initial"] = instance_field.value 
+                    elif gfield_key in session:
+                        field_args["initial"] = session[gfield_key]
                     else: 
                         field_args["initial"] = field.default
                     
@@ -142,7 +146,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                     field_args["max_length"] = FIELD_PHONE_LENGTH
                 elif field.field_type == 'FileField':
                     field_args["validators"] = [FileValidator()]
-                    
+                
                 form.fields[field_key] = field_class(**field_args)
 
                 if not field_class == EmailVerificationField:
@@ -156,7 +160,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                     form.fields[field_key].widget.years = list(range(1920, THIS_YEAR + 10))
                 if widget_name in ('dateinput', 'selectdatewidget', 'datetimeinput'):
                     form.fields[field_key].initial = datetime.now()
-
+                    
             for field_key, instance_field in instance_fields.items():
                 form.fields[field_key + "-id"] = forms.Field(widget=forms.HiddenInput(attrs={'value': instance_field.id}))
                 
@@ -252,6 +256,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
         entry.save()
         for field in self.form_fields:
             field_key = "field_%s" % field.id
+            gfield_key = self.form.slug + "." + field_key
             
             value = self.cleaned_data[field_key]
             entry_id = self.cleaned_data.get(field_key + "-id", None)
@@ -277,6 +282,9 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             else:
                 field_entry = FieldEntry(field_id = field.id, entry=entry, value = value)
                 field_entry.save()
+
+            if self.session:
+                self.session[gfield_key] = value
 
         for field in self.auto_fields:
             value = field.choices
