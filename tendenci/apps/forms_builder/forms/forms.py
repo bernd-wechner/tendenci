@@ -52,13 +52,17 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
         Dynamically add each of the form fields for the given form model
         instance and its related field model instances.
         """
-        self.instance = kwargs.get("instance", None)
+        self.edit_mode = isinstance(kwargs.get("instance", None), FormEntry)
+        if self.edit_mode:
+            self.instance = kwargs["instance"]
+            
         self.user = user
         self.form = form
-        self.form_fields = (form.fields.all() if self.instance else form.fields.visible()).order_by('position')
+        self.form_fields = (form.fields.all() if self.edit_mode else form.fields.visible()).order_by('position')
         self.auto_fields = form.fields.auto_fields().order_by('position')
         self.session = session
         super(FormForForm, self).__init__(*args, **kwargs)
+        
 
         def add_fields(form, form_fields):
             instance_fields = {}
@@ -105,7 +109,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                         default = False
                     field.default = default
                 
-                if self.instance:
+                if self.edit_mode:
                     #field_args["show_hidden_initial"] = True
 
                     try:
@@ -123,11 +127,14 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                     
                     # As it's already been submitted (we have an instance) we don't require a 
                     # new file upload. Moreover the FileField cannot be given an initial value
-                    # (Django prohibits rhis for security reasons).
+                    # (Django prohibits this for security reasons).
                     if field.field_type == "FileField":
                         field.required = False
                 else:
-                    field_args["initial"] = field.default
+                    if field.remember and gfield_key in session:
+                        field_args["initial"] = session[gfield_key]
+                    else:
+                        field_args["initial"] = field.default
 
                 if field_widget is not None:
                     module, widget = field_widget.rsplit(".", 1)
