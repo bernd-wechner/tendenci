@@ -411,7 +411,7 @@ def form_detail(request, slug=None, id=None, template="forms/form_detail.html"):
         billing_form = None
 
     form_for_form = FormForForm(form, request.user, request.session, request.POST or None, request.FILES or None, instance=entry)
-        
+    
     if get_setting('site', 'global', 'captcha'): # add captcha
         if billing_form:
             # append the captcha to the end of the billing form

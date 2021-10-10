@@ -70,6 +70,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             for field in form_fields:
                 field_key = self.field_key(field)
                 gfield_key = self.field_key(field, True)
+
                 if "/" in field.field_type:
                     field_class, field_widget = field.field_type.split("/")
                 else:
@@ -119,11 +120,14 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                     
                     if instance_field:
                         instance_fields[field_key] = instance_field
-                        field_args["initial"] = instance_field.value 
+                        field_args["initial"] = instance_field.value
+                        field.remembered = False
                     elif field.remember and gfield_key in session:
                         field_args["initial"] = session[gfield_key]
+                        field.remembered = True
                     else: 
                         field_args["initial"] = field.default
+                        field.remembered = False
                     
                     # As it's already been submitted (we have an instance) we don't require a 
                     # new file upload. Moreover the FileField cannot be given an initial value
@@ -133,8 +137,10 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                 else:
                     if field.remember and gfield_key in session:
                         field_args["initial"] = session[gfield_key]
+                        field.remembered = True
                     else:
                         field_args["initial"] = field.default
+                        field.remembered = False
 
                 if field_widget is not None:
                     module, widget = field_widget.rsplit(".", 1)
@@ -222,7 +228,12 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             add_fields(self, self.form_fields)
             add_pricing_fields(self, self.form)
 
-        if get_setting('site', 'global', 'captcha') and not user.is_authenticated: # add captcha if not logged in
+        # Disable captcha logged in or if any fields are flagged for remembering
+        # and remembered data is available. Logged in users are trusted, as are 
+        # users who have remembered form data  (i.e. already submitted once with a captcha) 
+        if (get_setting('site', 'global', 'captcha') 
+                and not user.is_authenticated
+                and not any([f.remembered for f in self.form_fields])): 
             self.fields['captcha'] = CustomCatpchaField(label=_('Type the code below'))
 
         self.add_form_control_class()
