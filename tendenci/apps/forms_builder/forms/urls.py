@@ -29,6 +29,9 @@ urlpatterns = [
     url(r"^%s/entry/(?P<id>\d+)$" % urlpath, views.entry_detail, name="form_entry_detail"),
     url(r"^%s/entry/edit/(?P<id>\d+)$" % urlpath, views.form_detail, name="form_entry_edit"),
 
+    # Form memory management
+    url(r"^%s/memories/(?P<id>\d+)$" % urlpath, views.memories, name="form_memories"),
+
     # Form design
     url(r"^%s/add/$" % urlpath, views.add, name="form_add"),
     url(r"^%s/export/$" % urlpath, views.export, name="form_export"),
