@@ -244,6 +244,12 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             key = self.form.slug + "." + key
         return key 
 
+    def field_key(self, field, is_global=False):
+        key = "field_%s" % field.id
+        if is_global:
+            key = self.form.slug + "." + key
+        return key
+     
     def clean_pricing_option(self):
         pricing_pk = int(self.cleaned_data['pricing_option'])
         [pricing_option] = self.form.pricing_set.filter(pk=pricing_pk)[:1] or [None]
@@ -335,7 +341,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             if field_class == "EmailVerificationField":
                 return self.cleaned_data["field_%s" % field.id]
             
-        user_email = getattr(self.user, "email", "").strip()
+        user_email = getattr(self.user, "email", "").strip() 
         if validate_email(user_email):
             return user_email
         
