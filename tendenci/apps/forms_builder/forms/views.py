@@ -273,7 +273,7 @@ def memories(request, id, template_name="forms/memories.html"):
         memories.append(memory) 
     
     return render_to_resp(request=request, template_name=template_name,
-        context={'form':form,'memories': memories})
+        context={'form':form,'memories': memories, 'age_limit': str(datetime.timedelta(seconds=settings.SESSION_COOKIE_AGE))})
 
 
 @is_enabled('forms')

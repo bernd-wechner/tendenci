@@ -19,7 +19,11 @@
   <div class="page-header">
     <h1>{% firstof MODULE_FORMS_LABEL trans 'Form' %} {% trans 'Memories' %}</h1>
     <h2>{{ form.title }}</h2>
-    <p>{{ memories | length }} memories in total.</p>
+    <p>This form is configured to remember submissions so that when it is opened again it
+    is pre-filled with what was last submitted.</p> 
+    <p>Memory is tied to a session, which has the lifespan of a browser session identifying
+    cookie, currently confiured for: {{age_limit}}</p>
+    <p>{{ memories | length }} memories are currently stored for this form.</p>
   </div>
   
 {% autopaginate memories 10 %}

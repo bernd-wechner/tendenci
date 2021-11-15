@@ -196,7 +196,30 @@ class Form(TendenciBaseModel):
             if field.field_type == 'FileField':
                 return True
         return False
-
+    
+    @property
+    def has_memory(self):
+        '''
+        Returns True if any of the forms fields have the remember flag set.
+        
+        Useful for a template to make decisions base don whether this is a form that has memory or not.
+        '''
+        for field in self.fields.all():
+            if field.remember:
+                return True
+        return False
+    
+    def field_key(self, field, is_global=False):
+        '''
+        Returns a key that can be used to describe this field in a dictionary.
+        
+        :param field: The number of the field.
+        :param is_global: If true adds the form slug to the key so it can work in dicts across multiple forms. 
+        '''
+        key = "field_%s" % field.id
+        if is_global:
+            key = self.slug + "." + key
+        return key 
 
 class FieldManager(models.Manager):
     """

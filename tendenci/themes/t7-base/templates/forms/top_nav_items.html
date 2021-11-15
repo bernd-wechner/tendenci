@@ -93,6 +93,14 @@
                                     </span>
                                 </li>
                                 {% endif %}
+
+                                {% if app_object.has_memory %}
+                                <li class="content-item">
+                                    <span class="app-name">
+                                        <a href="{% url 'form_memories' app_object.pk %}">{% trans "View Memories" %}</a>
+                                    </span>
+                                </li>
+                                {% endif %}
                             {% endif %}
 
                             {% if can_edit_form %}

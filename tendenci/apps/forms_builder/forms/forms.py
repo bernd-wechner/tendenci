@@ -68,8 +68,8 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             instance_fields = {}
             
             for field in form_fields:
-                field_key = self.field_key(field)
-                gfield_key = self.field_key(field, True)
+                field_key = self.form.field_key(field)
+                gfield_key = self.form.field_key(field, True)
 
                 if "/" in field.field_type:
                     field_class, field_widget = field.field_type.split("/")
@@ -285,8 +285,8 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             
         entry.save()
         for field in self.form_fields:
-            field_key = self.field_key(field)
-            gfield_key = self.field_key(field, True)
+            field_key = self.form.field_key(field)
+            gfield_key = self.form.field_key(field, True)
             
             value = self.cleaned_data[field_key]
             entry_id = self.cleaned_data.get(field_key + "-id", None)
