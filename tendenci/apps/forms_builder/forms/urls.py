@@ -10,11 +10,21 @@ if not urlpath:
     urlpath = "forms"
 
 urlpatterns = [
+    # Form search/list
     url(r"^%s/$" % urlpath, views.search, name="forms"),
+
+    # Form design
+    url(r"^%s/add/$" % urlpath, views.add, name="form_add"),
+    url(r"^%s/export/$" % urlpath, views.export, name="form_export"),
+    url(r"^%s/update_fields/(?P<id>\d+)$" % urlpath, views.update_fields, name="form_field_update"),
+    url(r"^%s/edit/(?P<id>\d+)$" % urlpath, views.edit, name="form_edit"),
+    url(r"^%s/delete/(?P<id>\d+)$" % urlpath, views.delete, name="form_delete"),
+    url(r"^%s/copy/(?P<id>\d+)$" % urlpath, views.copy, name="form_copy"),
+    url(r"^%s/payment/(?P<invoice_id>\d+)/(?P<invoice_guid>[\d\w-]+)?/$" % urlpath, views.form_entry_payment, name="form_entry_payment"),
     
     # Form use
-    url(r"^%s/(?P<slug>.*)/sent/$" % urlpath, views.form_sent, name="form_sent"),
     url(r"^%s/files/(?P<id>\d+)$" % urlpath, views.files, name="form_files"),
+    url(r"^%s/(?P<slug>.*)/sent/$" % urlpath, views.form_sent, name="form_sent"),
     url(r"^%s/(?P<slug>.*)/$" % urlpath, views.form_detail, name="form_detail"),
 
     # Form entry management
@@ -31,13 +41,4 @@ urlpatterns = [
 
     # Form memory management
     url(r"^%s/memories/(?P<id>\d+)$" % urlpath, views.memories, name="form_memories"),
-
-    # Form design
-    url(r"^%s/add/$" % urlpath, views.add, name="form_add"),
-    url(r"^%s/export/$" % urlpath, views.export, name="form_export"),
-    url(r"^%s/update_fields/(?P<id>\d+)$" % urlpath, views.update_fields, name="form_field_update"),
-    url(r"^%s/edit/(?P<id>\d+)$" % urlpath, views.edit, name="form_edit"),
-    url(r"^%s/delete/(?P<id>\d+)$" % urlpath, views.delete, name="form_delete"),
-    url(r"^%s/copy/(?P<id>\d+)$" % urlpath, views.copy, name="form_copy"),
-    url(r"^%s/payment/(?P<invoice_id>\d+)/(?P<invoice_guid>[\d\w-]+)?/$" % urlpath, views.form_entry_payment, name="form_entry_payment"),
 ]
