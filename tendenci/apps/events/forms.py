@@ -11,7 +11,7 @@ from dateutil.relativedelta import relativedelta
 from django import forms
 from django.db.models import Q
 from django.forms.widgets import RadioSelect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.forms.formsets import BaseFormSet
 from django.forms.models import BaseModelFormSet
 from django.forms.utils import ErrorList
@@ -32,7 +32,7 @@ from tendenci.apps.events.models import (
     RecurringEvent, Registrant
 )
 
-from form_utils.forms import BetterModelForm
+from tendenci.libs.form_utils.forms import BetterModelForm
 from tendenci.libs.tinymce.widgets import TinyMCE
 from tendenci.apps.payments.models import PaymentMethod
 from tendenci.apps.perms.forms import TendenciBaseForm
@@ -1342,6 +1342,7 @@ class Reg8nEditForm(FormControlWidgetMixin, BetterModelForm):
             'limit',
             'payment_method',
             'payment_required',
+            'external_payment_link',
             'require_guests_info',
             'discount_eligible',
             'gratuity_enabled',
@@ -1362,6 +1363,7 @@ class Reg8nEditForm(FormControlWidgetMixin, BetterModelForm):
                     'limit',
                     'payment_method',
                     'payment_required',
+                    'external_payment_link',
                     'require_guests_info',
                     'discount_eligible',
                     'gratuity_enabled',
@@ -1450,6 +1452,8 @@ class Reg8nEditForm(FormControlWidgetMixin, BetterModelForm):
             del self.fields['gratuity_enabled']
             del self.fields['gratuity_options']
             del self.fields['gratuity_custom_option']
+        if not get_setting('module', 'events', 'usethirdpartypayment'):
+            del self.fields['external_payment_link']
         self.add_form_control_class()
 
     def clean_use_custom_reg(self):

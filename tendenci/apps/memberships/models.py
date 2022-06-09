@@ -11,7 +11,7 @@ from django.db import models
 from django.urls import reverse
 from django.db.models.query_utils import Q
 from django.template import engines
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django import forms
@@ -2097,13 +2097,14 @@ class MembershipDefault(TendenciBaseModel):
                 self.directory = Directory.objects.create(**params)
                 self.save()
 
-    def get_common_urls(self):
+    def get_common_urls(self, site_url=None):
         """
         Get common urls related with this membership, such as
          directory_url, directory_edit_url, membership_link,
          invoice_link, membership_type
         """
-        site_url = get_setting('site', 'global', 'siteurl')
+        if not site_url:
+            site_url = get_setting('site', 'global', 'siteurl')
         if self.directory:
             directory_url = '{0}{1}'.format(site_url, reverse('directory',
                                                  args=[self.directory.slug]))
@@ -2850,4 +2851,3 @@ class MembershipFile(File):
     """
     class Meta:
         app_label = 'memberships'
-        manager_inheritance_from_future = True

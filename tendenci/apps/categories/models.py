@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Manager
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from tendenci.apps.categories.utils import prep_category
 
@@ -66,6 +66,9 @@ class CategoryManager(Manager):
         categories = []
         sub_categories = []
         for cat in cat_items:
+            # grab only those categories that have associated objects
+            if not cat.object or not hasattr(cat.object, 'status') or not cat.object.status:
+                continue
             if cat.category and cat.category not in categories:
                 categories.append(cat.category)
             elif cat.parent and cat.parent not in sub_categories:

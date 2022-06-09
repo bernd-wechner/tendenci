@@ -15,8 +15,9 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.forms.models import inlineformset_factory
 from django.contrib import messages
 from django.core.files.storage import default_storage
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 # from djcelery.models import TaskMeta
 
 from tendenci.apps.perms.decorators import is_enabled
@@ -262,7 +263,8 @@ def memories(request, id, template_name="forms/memories.html"):
     for s in s_mem:
         memory = {"Expires": s.expire_date}
         for key, val in s.get_decoded().items():
-            if key_match := re.match(key_pattern, key):
+            key_match = re.match(key_pattern, key)
+            if key_match:
                 field_id = key_match["field_id"]
                 try:
                     field = form.fields.get(id=field_id)
@@ -273,7 +275,7 @@ def memories(request, id, template_name="forms/memories.html"):
         memories.append(memory) 
     
     return render_to_resp(request=request, template_name=template_name,
-        context={'form':form,'memories': memories, 'age_limit': str(datetime.timedelta(seconds=settings.SESSION_COOKIE_AGE))})
+        context={'form':form,'memories': memories})
 
 
 @is_enabled('forms')

@@ -15,6 +15,7 @@ from datetime import datetime, timedelta, date
 from collections import OrderedDict
 from dateutil.parser import parse as dparse, ParserError 
 from dateutil.relativedelta import relativedelta
+from urllib.parse import urlparse
  
 from django.urls import reverse
 from django.urls.resolvers import NoReverseMatch
@@ -32,7 +33,7 @@ from django.db.models import ForeignKey, OneToOneField, Aggregate, CharField, Va
 from django.db.models.query_utils import Q
 from django.db.models.functions import Cast
 from django.core.files.storage import default_storage
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from django.contrib.postgres.aggregates import StringAgg 
@@ -69,14 +70,18 @@ from tendenci.apps.memberships.forms import (
     MembershipDefault2Form,
     AutoRenewSetupForm,
     MessageForm,
-    MemberSearchForm)
+    MemberSearchForm,
+    EmailMembersForm)
 from tendenci.apps.memberships.utils import (prepare_chart_data,
     get_days, get_over_time_stats, iter_memberships,
     get_membership_stats, ImportMembDefault,
     get_membership_app, get_membership_summary_data,
-    email_pending_members)
+    email_pending_members,
+    email_membership_members)
 from tendenci.apps.base.forms import CaptchaForm
 from tendenci.apps.perms.decorators import is_enabled
+from tendenci.apps.theme.utils import get_template_content_raw
+from tendenci.apps.base.utils import get_next_url
 
 
 @login_required
@@ -98,7 +103,10 @@ def memberships_search(request, app_id=0, template_name="memberships/search-per-
                                 'region',
                                 'password',
                                 ''])
-    form = MemberSearchForm(request.GET, app_fields=app_fields, user=request.user)
+    if 'email_members' in request.POST or 'email_members_selected' in request.POST:
+        form = MemberSearchForm(request.POST, app_fields=app_fields, user=request.user)
+    else:
+        form = MemberSearchForm(request.GET, app_fields=app_fields, user=request.user)
     if form.is_valid():
         user_fieldnames = [field.name for field in User._meta.fields if \
                            field.get_internal_type() in ['CharField', 'TextField']]
@@ -134,17 +142,58 @@ def memberships_search(request, app_id=0, template_name="memberships/search-per-
                     elif field_name in demographic_fieldnames:
                         memberships = memberships.filter(Q(**{f'user__demographics__{field_name}__icontains': field_value}))
 
-    memberships = memberships.order_by('user__last_name', 'user__first_name')
+        memberships = memberships.order_by('user__last_name', 'user__first_name')
+    
+        if 'export' in request.GET:
+            EventLog.objects.log(description="memberships export from memberships search")
+    
+            response = StreamingHttpResponse(
+            streaming_content=(iter_memberships(memberships, app_fields)),
+            content_type='text/csv',)
+            response['Content-Disposition'] = f'attachment;filename=memberships_export_{ttime.time()}.csv'
+            return response
 
-    if 'export' in request.GET:
-        EventLog.objects.log(description="memberships export from memberships search")
+        # set up email form with default values
+        default_sender_display = get_setting('site', 'global', 'sitedisplayname')
+        default_subject = request.session.get('email_subject', '') or 'Your Membership Application Needs Attention'
+        default_body = request.session.get('email_body', '')
+        if not default_body:
+            default_body = get_template_content_raw('memberships/message/email-members-body.txt')
+        email_form = EmailMembersForm(request.POST or None,
+                            initial={'subject': default_subject,
+                                     'body': default_body,
+                                    'sender_display': default_sender_display,
+                                    'reply_to': request.user.email})
 
-        response = StreamingHttpResponse(
-        streaming_content=(iter_memberships(memberships, app_fields)),
-        content_type='text/csv',)
-        response['Content-Disposition'] = f'attachment;filename=memberships_export_{ttime.time()}.csv'
-        return response
+        if ('email_members' in request.POST or 'email_members_selected' in request.POST) \
+                and email_form.is_valid():
+            if 'email_members_selected' in request.POST:
+                selected_members = request.POST.getlist('selected_members')
+                if selected_members:
+                    selected_members = [int(m) for m in selected_members]
+                    memberships = memberships.filter(id__in=selected_members)
 
+            email = email_form.save()
+            if not email.sender_display:
+                email.sender_display = request.user.get_full_name()
+            if not email.reply_to:
+                email.reply_to = request.user.email
+            email.content_type = "html"
+            email.allow_anonymous_view = False
+            email.allow_user_view = False
+            email.allow_member_view = False
+            email.save(request.user)
+            retn_content = email_membership_members(email,
+                                    memberships,
+                                    request=request)
+    
+            EventLog.objects.log(instance=email)
+            return StreamingHttpResponse(streaming_content=retn_content)
+
+    else:
+        # search_form is invalid
+        memberships = memberships.none()
+        email_form = None
 
     EventLog.objects.log()
 
@@ -152,6 +201,8 @@ def memberships_search(request, app_id=0, template_name="memberships/search-per-
         context={
             'memberships': memberships,
             'search_form': form,
+            'email_form': email_form,
+            'total_members': memberships.count(),
             'app': app,
             'app_fields': app_fields})
 
@@ -380,12 +431,18 @@ def membership_applications(request, template_name="memberships/applications/lis
 def referer_url(request):
     """
     Save the membership-referer-url
-    in sessions.  Then redirect to the 'next' URL
+    in sessions.  Then redirect to the 'next_url' URL
     """
-    next = request.GET.get('next')
+    next_url = get_next_url(request)
     site_url = get_setting('site', 'global', 'siteurl')
 
-    if not next:
+    if not next_url:
+        raise Http404
+
+    # this view is only used at "Become a member" for events.
+    # avoid redirecting to external sites
+    o = urlparse(next_url)
+    if o.hostname and o.hostname not in site_url:
         raise Http404
 
     #  make referer-url relative if possible; remove domain
@@ -394,7 +451,7 @@ def referer_url(request):
         request.session['membership-referer-url'] = referer_url
 
     try:
-        return redirect(next)
+        return redirect(next_url)
     except NoReverseMatch:
         raise Http404 
 
@@ -631,7 +688,7 @@ def membership_default_import_preview(request, mimport_id,
             users_list.append(user_display)
             if not fieldnames:
                 fieldnames = list(idata.row_data.keys())
-                
+
         # DateTime fields are sensitive to parse failures
         # They are not parsed in the preview yet, in fact all 
         # data travels as strings to be cleaned and parsed just 
@@ -661,14 +718,17 @@ def membership_default_import_preview(request, mimport_id,
         # before committing the import.
         # TODO: This could generalize to all ID type imports supported
         if 'membership_type' in fieldnames:
-            mts = {mt.pk:mt.name for mt in MembershipType.objects.all()}
+            mts = {mt.pk: mt.name for mt in MembershipType.objects.all()}
 
             for u in users_list:
-                try:
-                    mt = int(str(u['membership_type']))
-                except ValueError:
-                    mt = 'Value Error'
-                    
+                if 'membership_type' in u:
+                    try:
+                        mt = int(str(u['membership_type']))
+                    except ValueError:
+                        mt = 'Value Error'
+                else:
+                    mt = None
+
                 u['membership_type'] = mts.get(mt, 'None')
 
         return render_to_resp(request=request, template_name=template_name, context={
@@ -1079,10 +1139,12 @@ def membership_default_add_legacy(request):
     if not app:
         raise Http404
 
-    username = request.GET.get('username', u'')
     redirect_url = reverse('membership_default.add', args=[app.slug])
+    username = request.GET.get('username', '')
     if username:
-        redirect_url = '%s?username=%s' % (redirect_url, username)
+        [u] = User.objects.filter(username=username)[:1] or [None]
+        if u:
+            redirect_url = '%s?username=%s' % (redirect_url, u.username)
     return redirect(redirect_url)
 
 
@@ -1097,14 +1159,24 @@ def membership_default_add(request, slug='', membership_id=None,
     user = None
     membership = None
     renewed_corp = None
-    username = request.GET.get('username', u'')
+    username = request.GET.get('username', '')
+    # user passed in via username from url
+    [u] = User.objects.filter(username=username)[:1] or [None]
     is_renewal = False
+    join_under_corporate = kwargs.get('join_under_corporate', False)
+    cm_id = kwargs.get('cm_id', None)
 
     if membership_id:
         # it's renewal - make sure they are logged in
+        redirect_url = reverse('auth_login') + '?next='
         if not request.user.is_authenticated:
-            return HttpResponseRedirect('%s?next=%s' % (reverse('auth_login'),
-                                request.get_full_path()))
+            if join_under_corporate and cm_id:
+                redirect_url += reverse('membership_default.renew_under_corp',
+                                        kwargs={'cm_id': cm_id, 'membership_id': membership_id})
+            else:
+                redirect_url += reverse('membership_default.renew',
+                                        kwargs={'slug': slug, 'membership_id': membership_id})
+            return HttpResponseRedirect(redirect_url)
         membership = get_object_or_404(MembershipDefault, id=membership_id)
         if not (request.user.is_superuser or request.user == membership.user):
             raise Http403
@@ -1115,8 +1187,7 @@ def membership_default_add(request, slug='', membership_id=None,
         membership_type_id = int(membership_type_id)
     else:
         membership_type_id = 0
-
-    join_under_corporate = kwargs.get('join_under_corporate', False)
+    
     corp_membership = None
     is_corp_rep = False
 
@@ -1130,14 +1201,13 @@ def membership_default_add(request, slug='', membership_id=None,
         if not has_perm(request.user, 'memberships.view_app', app):
             raise Http403
 
-        cm_id = kwargs.get('cm_id')
         if not cm_id:
             # redirect them to the corp_pre page
             redirect_url = reverse('membership_default.corp_pre_add')
 
             if username:
                 return HttpResponseRedirect(
-                    '%s?username=%s' % (redirect_url, username))
+                    '%s?username=%s' % (redirect_url, u.username))
             return redirect(redirect_url)
 
         # check if they have verified their email or entered the secret code
@@ -1237,7 +1307,7 @@ def membership_default_add(request, slug='', membership_id=None,
 
             if username:
                 return HttpResponseRedirect(
-                    '%s?username=%s' % (redirect_url, username))
+                    '%s?username=%s' % (redirect_url, u.username))
             return redirect(redirect_url)
 
     if not (request.user.is_superuser or (join_under_corporate and is_corp_rep)):
@@ -1254,7 +1324,7 @@ def membership_default_add(request, slug='', membership_id=None,
         user = membership.user
     else:
         if any(allowed_users) and username:
-            [user] = User.objects.filter(username=username)[:1] or [None]
+            user = u
 
     if not app:
         raise Http404
@@ -1919,11 +1989,12 @@ def membership_default_corp_pre_add(request, cm_id=None,
                                                 corporate_membership_id,
                                                 secret_hash]))
 
-            passed_username = request.POST.get('username', u'')
+            passed_username = request.POST.get('username', '')
+            [u] = User.objects.filter(username=passed_username)[:1] or [None]
             redirect_url = reverse('membership_default.add_under_corp', args=[corporate_membership_id])
 
-            if passed_username:
-                return HttpResponseRedirect('%s?username=%s' % (redirect_url, passed_username))
+            if u:
+                return HttpResponseRedirect('%s?username=%s' % (redirect_url, u.username))
             return redirect(redirect_url)
 
     c = {'app': app, "form": form}
@@ -1979,7 +2050,7 @@ def delete(request, id, template_name="memberships/applications/delete.html"):
         membership.delete(log=True)
         messages.add_message(request, messages.SUCCESS, _(msg_deleted))
 
-        next_page = request.GET.get('next', '')
+        next_page = get_next_url(request)
         if next_page:
             return HttpResponseRedirect(next_page)
 
@@ -2013,7 +2084,7 @@ def expire(request, id, template_name="memberships/applications/expire.html"):
         # log an event
         EventLog.objects.log(instance=membership, description=msg_expired)
 
-        next_page = request.GET.get('next', '')
+        next_page = get_next_url(request)
         if next_page:
             return HttpResponseRedirect(next_page)
 

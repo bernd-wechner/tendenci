@@ -2,8 +2,10 @@ import datetime
 
 from django import forms
 from django.forms.widgets import SelectDateWidget
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
+from django.conf import settings
+from django_q.tasks import schedule
 
 from tendenci.apps.emails.models import Email
 from tendenci.apps.site_settings.utils import get_setting
@@ -17,6 +19,7 @@ from tendenci.apps.newsletters.models import (
 )
 from tendenci.apps.perms.utils import get_query_filters, get_groups_query_filters
 from tendenci.apps.user_groups.models import Group
+from tendenci.apps.base.forms import FormControlWidgetMixin
 
 EMAIL_SEARCH_CRITERIA_CHOICES = (
     ('subject__icontains', _('Subject')),
@@ -83,14 +86,12 @@ class OldGenerateForm(forms.ModelForm):
         self.fields['event_start_dt'].initial = datetime.date.today()
         self.fields['event_end_dt'].initial = datetime.date.today() + datetime.timedelta(days=30)
         
-        default_groups = Group.objects.filter(status=True, status_detail="active")
+        default_groups = Group.objects.filter(status=True, status_detail="active",
+                                              sync_newsletters=True)
         if not self.request.user.is_superuser:
-
             if get_setting('module', 'user_groups', 'permrequiredingd') == 'change':
                 filters = get_groups_query_filters(self.request.user,)
-            else:
-                filters = get_query_filters(self.request.user, 'user_groups.view_group', **{'perms_field': False})
-            default_groups = default_groups.filter(filters).distinct()
+                default_groups = default_groups.filter(filters).distinct()
         self.fields['group'].queryset = default_groups
 
         for key in not_required:
@@ -206,11 +207,36 @@ class MarketingStepFourForm(forms.ModelForm):
         return group
 
 
-class MarketingStepFiveForm(forms.ModelForm):
+class MarketingStepFiveForm(FormControlWidgetMixin, forms.ModelForm):
     create_article = forms.BooleanField(label=_('Create an Article from this Newsletter?'), required=False)
+    schedule_send = forms.BooleanField(label=_('Schedule to Send?'), required=False)
+    schedule_send_dt = forms.SplitDateTimeField(label=_('Starts On'), required=False,
+                                  input_date_formats=['%Y-%m-%d', '%m/%d/%Y'],
+                                  input_time_formats=['%I:%M %p', '%H:%M:%S'])
     class Meta:
         model = Newsletter
-        fields = ('create_article', 'send_status',)
+        fields = ('create_article',
+                  'schedule_send',
+                  'schedule_send_dt',
+                  'schedule_type',
+                  'repeats',
+                  'send_status',)
+
+    def __init__(self, *args, **kwargs):
+        super(MarketingStepFiveForm, self).__init__(*args, **kwargs)
+        if not settings.NEWSLETTER_SCHEDULE_ENABLED:
+            self.fields.pop('schedule_send')
+            self.fields.pop('schedule_send_dt')
+            self.fields.pop('schedule_type')
+            self.fields.pop('repeats')
+        else:
+            self.fields['schedule_send_dt'].initial = datetime.datetime.now() + datetime.timedelta(days=1)
+
+    def clean_schedule_send_dt(self):
+        schedule_send_dt = self.cleaned_data['schedule_send_dt']
+        if schedule_send_dt and schedule_send_dt < datetime.datetime.now() + datetime.timedelta(minutes=1):
+            raise forms.ValidationError(_('Please select a time at least 5 minutes from now'))
+        return schedule_send_dt
 
     def clean(self):
         data = self.cleaned_data
@@ -219,6 +245,11 @@ class MarketingStepFiveForm(forms.ModelForm):
         if not is_newsletter_relay_set():
             raise forms.ValidationError(_('Email relay is not configured properly.'
                                             ' Newsletter cannot be sent.'))
+        if 'schedule_send' in data and data['schedule_send']:
+            if not 'schedule_send_dt' in data or not data['schedule_send_dt']:
+                raise forms.ValidationError(_("You've checked Schedule to Send, please also pick a date and time to send."))
+            if not 'schedule_type' in data or not data['schedule_type']:
+                raise forms.ValidationError(_("Please select Frequency."))
 
         return data
 
@@ -226,12 +257,79 @@ class MarketingStepFiveForm(forms.ModelForm):
         create_article = self.cleaned_data.get('create_article', False)
         newsletter = super(MarketingStepFiveForm, self).save(*args, **kwargs)
         newsletter.date_submitted = datetime.datetime.now()
+        if newsletter.schedule_type == 'O':
+            newsletter.repeats = 0
         newsletter.save()
 
         if create_article:
             newsletter.generate_article(newsletter.email.creator)
 
-        newsletter.send_to_recipients()
+        schedule_send = self.cleaned_data.get('schedule_send', False)
+        if not schedule_send:
+            # not scheduled - send immediately
+            newsletter.send_to_recipients()
+        else:
+            # make a schedule
+            repeats = newsletter.repeats
+            if repeats == 0:
+                # set it to 1 otherwise django-q wont run
+                repeats = 1
+            s = schedule(
+                    'django.core.management.call_command',
+                    'send_newsletter',
+                    newsletter.id,
+                    schedule_type=newsletter.schedule_type,
+                    next_run=newsletter.schedule_send_dt,
+                    repeats=repeats)
+            newsletter.schedule = s
+            newsletter.save()
+
+        return newsletter
+
+
+class MarketingEditScheduleForm(FormControlWidgetMixin, forms.ModelForm):
+    schedule_send_dt = forms.SplitDateTimeField(label=_('Starts On'),
+                                  input_date_formats=['%Y-%m-%d', '%m/%d/%Y'],
+                                  input_time_formats=['%I:%M %p', '%H:%M:%S'])
+    class Meta:
+        model = Newsletter
+        fields = ('schedule_send_dt',
+                  'schedule_type',
+                  'repeats',)
+
+    def clean_schedule_send_dt(self):
+        schedule_send_dt = self.cleaned_data['schedule_send_dt']
+        if schedule_send_dt and schedule_send_dt < datetime.datetime.now() + datetime.timedelta(minutes=1):
+            raise forms.ValidationError(_('Please select a time at least 5 minutes from now'))
+        return schedule_send_dt
+
+    def save(self, *args, **kwargs):
+        newsletter = super(MarketingEditScheduleForm, self).save(*args, **kwargs)
+        if newsletter.schedule_type == 'O':
+            newsletter.repeats = 0
+        newsletter.save()
+
+        # update a schedule
+        repeats = newsletter.repeats
+        if repeats == 0:
+            # set it to 1 otherwise django-q wont run
+            repeats = 1
+        if newsletter.schedule:
+            s = newsletter.schedule
+            s.schedule_type = newsletter.schedule_type
+            s.next_run = newsletter.schedule_send_dt
+            s.repeats = repeats
+            s.save()
+        else:
+            s = schedule(
+                    'django.core.management.call_command',
+                    'send_newsletter',
+                    newsletter.id,
+                    schedule_type=newsletter.schedule_type,
+                    next_run=newsletter.schedule_send_dt,
+                    repeats=repeats)
+            newsletter.schedule = s
+            newsletter.save()
 
         return newsletter
 

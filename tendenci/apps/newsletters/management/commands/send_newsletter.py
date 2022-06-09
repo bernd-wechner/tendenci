@@ -26,7 +26,7 @@ class Command(BaseCommand):
 
     def send_newsletter(self, newsletter_id, **kwargs):
         from tendenci.apps.emails.models import Email
-        from tendenci.apps.newsletters.models import Newsletter
+        from tendenci.apps.newsletters.models import Newsletter, NewsletterRecurringData
         from tendenci.apps.site_settings.utils import get_setting
         from tendenci.apps.base.utils import validate_email
 
@@ -65,6 +65,15 @@ class Command(BaseCommand):
             newsletter.send_status == 'resending'
 
         newsletter.save()
+
+        if newsletter.schedule:
+            # save start_dt and status for the recurring
+            nr_data = NewsletterRecurringData(
+                        newsletter=newsletter,
+                        start_dt=datetime.datetime.now(),
+                        send_status=newsletter.send_status)
+            nr_data.save()
+            newsletter.nr_data = nr_data
 
         recipients = newsletter.get_recipients()
         email = newsletter.email
@@ -124,7 +133,7 @@ class Command(BaseCommand):
                         status_detail='archive').order_by('-create_dt')[:1] or [None]
                 if membership:
                     # do find and replace
-                    urls_dict = membership.get_common_urls()
+                    urls_dict = membership.get_common_urls(site_url=self.site_url)
                     for key in urls_dict.keys():
                         body = body.replace('[%s]' % key, urls_dict[key])
 
@@ -162,6 +171,12 @@ class Command(BaseCommand):
         newsletter.email_sent_count = counter
 
         newsletter.save()
+        if newsletter.schedule and newsletter.nr_data:
+            # save the finish_dt and email_sent_count for the recurring
+            newsletter.nr_data.finish_dt = datetime.datetime.now()
+            newsletter.nr_data.email_sent_count = newsletter.email_sent_count
+            newsletter.nr_data.send_status = newsletter.send_status
+            newsletter.nr_data.save()
 
         print("Successfully sent %s newsletter emails." % counter)
 

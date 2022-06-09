@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.contrib.auth.tokens import default_token_generator
 from django.template import loader
@@ -226,6 +226,7 @@ class LoginForm(ProhibitNullCharactersValidatorMixin, forms.Form):
 
 class PasswordResetForm(forms.Form):
     email = forms.EmailField(label=_("E-mail"), max_length=254, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    captcha = CustomCatpchaField(label=_('Type the letters you see in the box'), widget=CaptchaTextInput(attrs={'class': 'form-control'}))
 
     def clean_email(self):
         """

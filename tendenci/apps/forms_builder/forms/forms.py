@@ -6,7 +6,7 @@ import re
 
 from django import forms
 from importlib import import_module
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify
 from django.utils.safestring import mark_safe
 from django.core.files.storage import default_storage
@@ -47,7 +47,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
         model = FormEntry
         exclude = ("form", "entry_time", "entry_path", "payment_method", "pricing", 'custom_price',  "creator")
 
-    def __init__(self, form, user, session={}, *args, **kwargs):
+    def __init__(self, form, user, session=None, *args, **kwargs):
         """
         Dynamically add each of the form fields for the given form model
         instance and its related field model instances.
@@ -60,7 +60,7 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
         self.form = form
         self.form_fields = (form.fields.all() if self.edit_mode else form.fields.visible()).order_by('position')
         self.auto_fields = form.fields.auto_fields().order_by('position')
-        self.session = session
+        self.session = {} if session is None else session
         super(FormForForm, self).__init__(*args, **kwargs)
         
 
@@ -68,8 +68,8 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             instance_fields = {}
             
             for field in form_fields:
-                field_key = self.form.field_key(field)
-                gfield_key = self.form.field_key(field, True)
+                field_key = self.field_key(field)
+                gfield_key = form.form.slug + "." + field_key
 
                 if "/" in field.field_type:
                     field_class, field_widget = field.field_type.split("/")
@@ -110,8 +110,12 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                         default = False
                     field.default = default
                 
-                if self.edit_mode:
-                    #field_args["show_hidden_initial"] = True
+                if field.remember and gfield_key in self.session:
+                    field_args["initial"] = session[gfield_key]
+                    field.remembered = True
+                else:                
+                    field_args["initial"] = field.default
+                    field.remembered = False
 
                     try:
                         instance_field = self.instance.fields.get(field_id=field.id) 
@@ -285,9 +289,9 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
             
         entry.save()
         for field in self.form_fields:
-            field_key = self.form.field_key(field)
-            gfield_key = self.form.field_key(field, True)
-            
+            field_key = self.field_key(field)
+            gfield_key = self.form.slug + "." + field_key
+
             value = self.cleaned_data[field_key]
             entry_id = self.cleaned_data.get(field_key + "-id", None)
             
@@ -314,7 +318,10 @@ class FormForForm(FormControlWidgetMixin, forms.ModelForm):
                 field_entry.save()
 
             if field.remember and self.session:
-                self.session[gfield_key] = value
+                if not isinstance(value, str):
+                    self.session[gfield_key] = value.__str__()
+                else:
+                    self.session[gfield_key] = value
 
         for field in self.auto_fields:
             value = field.choices
